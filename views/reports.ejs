@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- ICONS BOOTSTRAP -->
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+
+    <title>Hello, world!</title>
+    <link rel="stylesheet" href="css/register_elements.css" type="text/css">
+    <link rel="stylesheet" href="css/navbar.css" type="text/css">
+    <link rel="stylesheet" href="css/reports.css" type="text/css">
+    
+
+  </head>
+  <body>
+    <%- include('navbar') %>
+    <div class="container">
+        <!-- <h1>Reportes</h1> -->
+        <div class="row">
+            <div class="col-md-11  mx-auto">
+                <div class="card shadow p-3 mb-5 bg-body rounded">
+                    <div class="card-header">
+                        <h4>Generar reporte</h4>
+                    </div>
+                    <div class="card-body">
+                        <form action="#" method="POST">
+                            
+                            <div class="form-group col-md-5 mb-3">
+                                <label for="">Desde</label>
+                                <input type="date" class="form-control" name="desde">
+                            </div>
+                            <div class="form-group col-md-5 mb-3">
+                                <label for="">Hasta</label>
+                                <input type="date" class="form-control" name="hasta" >
+                            </div>
+                            <div class="form-group col-md-5 mb-3">
+                                <input type="text" class="form-control" name="name" placeholder="Nombres">
+                            </div>
+                            <div class="form-group col-md-5 mb-3">
+                                <input type="number" class="form-control" name="email" placeholder="Numero de documento">
+                                <span><a href=""><i class="fas fa-search"></i></a></span>
+                            </div>                            
+                        </form>
+                    </div>
+                    <button type="submit" class="btn btn-primary mx-auto" >
+                        Generar reporte
+                    </button>
+                    <hr>
+                    <div class="col-md-11 mx-auto">
+                        <div>
+                            <header class="mx-auto" style="float: right;">
+                                <select class="form-select" aria-label="Default select example">
+                                    <option selected>Descargar</option>
+                                    <option value="1">.xlsx</option>
+                                    <option value="2">.pdf</option>
+                                    <option value="3">.text</option>
+                                  </select>
+                            </header>
+                        </div>
+                        <table class="table">
+                            <thead>
+                              <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Apellido</th>
+                                <th scope="col">Tipo_pers</th>
+                                <th scope="col">fecha</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <th scope="row">1</th>
+                                <td>Mark</td>
+                                <td>Otto</td>
+                                <td>@mdo</td>
+                                <td>@mdo</td>
+                              </tr>
+                              <tr>
+                                <th scope="row">2</th>
+                                <td>Jacob</td>
+                                <td>Thornton</td>
+                                <td>@fat</td>
+                                <td>@fat</td>
+                              </tr>
+                              <tr>
+                                <th scope="row">3</th>
+                                <td colspan="2">Larry the Bird</td>
+                                <td>@twitter</td>
+                                <td>@twitter</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                    </div>
+                </div>
+            </div>           
+        </div>
+    </div>
+
+
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
+   
+  </body>
+</html>
