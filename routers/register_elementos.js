@@ -4,7 +4,7 @@ const conexion = require('../conexion_BBDD.js');
 
 
 Ruta_registro.get('/register_elements', (req, res) => {
-    res.render('register_elements');
+    respuesta.render('register_elements');
 })
 
 // Ruta_prueba.get('/Listar_Personas', (peticion, respuesta)=>{

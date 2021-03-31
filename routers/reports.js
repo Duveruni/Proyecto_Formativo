@@ -4,7 +4,7 @@ const conexion = require('../conexion_BBDD.js');
 
 
 Ruta_reports.get('/reports', (req, res) => {
-    res.render('reports');
+    respuesta.render('reports');
 })
 
 module.exports = Ruta_reports;

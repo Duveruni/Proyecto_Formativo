@@ -1,83 +1,13 @@
-body{
-    background: #F1F1F1;
-    color: rgb(255,255,255,.4);
-    font-family: 'Raleway', sans-serif;
-    padding: 0 1em;
+#navbar{
+    background-color: #02757C;
 }
 
-.fa-bars:before{
-    color: #EE7912;
-}
-
-h1{
-    text-align: right;
-    color: #EE7912;
-    font-size: 1.5em;
-    margin-bottom: 1em;
-}
-nav{
-    background: #02757C;
-    box-sizing: border-box;
-    position: absolute;
-    height: 100%;
-    top: 0;
-    padding-top:3em ;
-    left: -18em;
-    transition: all .2s;
-    z-index: 5;
+#navbarText ul li a{
+    color: #FF5800;  
+    font-family: 'Noto Sans JP', sans-serif;
+    
 
 }
-.menu{
-    list-style: none;
-    line-height: 42px;
-    margin: 2em auto;
-    padding-left: 0;
-   /* padding-top: 1em;*/
-    width: 18em;
-
-}
-.menu li{
-    box-shadow: 3px 0 rgb(255,255,255, .2)inset;
-    padding-left: 1.5em;
-    margin-right: 10px;
-}
-.menu a{
-  /*  font-size: 20x;*/
-    color: #ddd;
-    text-decoration: none;
-    text-transform: uppercase;
-    display: block;
-    width: 100%;
-    transition: all .5s;
-}
-.menu li:hover{
-    box-shadow: 18em 0 rgba(255,255,255,.2)inset;
-}
-.menu li a span{
-    margin-left: 10px;
-}
-.menu a:hover{
-    margin-left: 1em;
-}
-/*a{
-    color:rgba(64,64,64);
-}*/
-.menu li a span{
-    margin-left: 10px;
-}
-#mostrar-nav > label{
-    cursor: pointer;
-    position: absolute;
-    top: 2em;
-    z-index: 20;
-    left: 2em;
-    font-size: 1.3em;
-
-
-}
-.fa-bars{
-    color: white;
-}
-nav.mostrar{
-    left: 0;
+li:hover {
+    background-color: #0bbac4ea;
 }

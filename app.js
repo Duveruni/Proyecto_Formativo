@@ -10,7 +10,7 @@ Servidor.set('views',__dirname+'/views');
 Servidor.use(express.static(__dirname+'/public'));
 
 Servidor.get('/', (peticion, respuesta)=>{
-    respuesta.render('signin');
+    respuesta.render('index');
 });
 
 Servidor.use('/registro', Ruta_registro);
