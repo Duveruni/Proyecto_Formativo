@@ -17,7 +17,8 @@
 
 
     <title>Hello, world!</title>
-    <link rel="stylesheet" href="css/register_elements.css">
+    <link rel="stylesheet" href="/css/register_elements.css">
+
   </head>
   <body>
     <%- include('navbar') %>
@@ -49,11 +50,11 @@
                                     </div>
                                 </div>
                                 <div class="col col-md-3" id="ventana_modal">
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style="float: right;" title="Registrar ahora">
-                                        Registrar
+                                    <button type="button" class="btn btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" style="float: right;" title="Registrar ahora">
+                                        <i class="fas fa-folder-plus me-1"></i>Registrar
                                     </button>
                                       
-                                    <!-- Modal -->
+                                    <!-- Modal registrar personas -->
                                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" aria-labelledby="staticBackdropLabel">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
@@ -66,31 +67,31 @@
                                                     <form action="#" method="POST" class="col-md-11 mx-auto">
                                                         <h5 class="data_title">Datos personales</h5>
                                                         <div class="form-group mb-3">
-                                                            <select class="form-select" aria-label="Default select example">
+                                                            <select class="form-select" aria-label="Default select example" id="tipo_documento">
                                                                 <option selected>Tipo de Documento</option>
-                                                                <option value="1">Tarjeta de Identidad</option>
-                                                                <option value="2">Cedula de Ciudadania</option>
-                                                                <option value="3">Documento Extranjero</option>
+                                                                <option value="Tarjeta de Identidad">Tarjeta de Identidad</option>
+                                                                <option value="Cedula de Ciudadania">Cedula de Ciudadania</option>
+                                                                <option value="Documento Extranjero">Documento Extranjero</option>
                                                             </select>
                                                         </div>
                                                         <div class="form-group mb-3" >
-                                                            <input type="number" class="form-control"  name="surname" placeholder="Numero de documento" >
+                                                            <input type="number" class="form-control"  name="surname" placeholder="Numero de documento" id="numero_documento">
                                                         </div>
                                                         <div class="form-group mb-3 mt-2">
-                                                            <input type="text" class="form-control" name="username" placeholder="Nombres" >
+                                                            <input type="text" class="form-control" name="username" placeholder="Nombres" id="nombres">
                                                         </div>
                                                         <div class="form-group mb-3">
-                                                            <input type="text" class="form-control" name="email" placeholder="Apellidos">
+                                                            <input type="text" class="form-control" name="email" placeholder="Apellidos" id="apellidos">
                                                         </div>
                                                         <div class="form-group mb-3">
-                                                            <input type="text" class="form-control" name="telefono" placeholder="Telefono">
+                                                            <input type="text" class="form-control" name="telefono" placeholder="Telefono" id="telefono">
                                                         </div>
                                                         <div class="form-group mb-3">
-                                                            <select class="form-select" aria-label="Default select example">
+                                                            <select class="form-select" aria-label="Default select example" id="tipo_persona">
                                                                 <option selected>Tipo de persona</option>
-                                                                <option value="1">Instructor</option>
-                                                                <option value="2">Aprendiz</option>
-                                                                <option value="3">Invitado</option>
+                                                                <option value="Instructor">Instructor</option>
+                                                                <option value="Aprendiz">Aprendiz</option>
+                                                                <option value="Invitado">Invitado</option>
                                                             </select>
                                                         </div>
                                                     </form>
@@ -98,7 +99,7 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Salir</button>
-                                                <button type="button" class="btn btn-success">Registrar</button>
+                                                <button type="button" class="btn btn-success" onclick="Registrar_persona();">Registrar</button>
                                             </div>
                                         </div>
                                     </div>
@@ -108,44 +109,136 @@
                         </div>
                         <hr style="color: #FF5800; border: 1px solid; width: 95%;" class="mx-auto">
                         <div class="col-md-11 mx-auto mt-3">
-                            <h5 class="data_title">Datos del Elemento</h5>
-                            <form action="#" method="POST">
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="input-group mb-3">                                           
-                                            <input type="text" class="form-control" placeholder="Tipo de Elemento" aria-label="Username" aria-describedby="basic-addon1">
-                                            <a href="" title="Buscar elemento"><span class="input-group-text" id="basic-addon1"><i class="fas fa-search fa-lg mt-2"></i></span></a>
-                                        </div>
-                                        <div class="form-floating">
-                                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
-                                            <label for="floatingTextarea2" id="label_text">Descripcion...</label>
+                            <div class="row">
+                                <div class="col">
+                                    <h5 class="data_title">Elementos Ingresados</h5>
+                                </div>
+                                <div class="col">
+                                    <!-- VENTANA MODAL registrar nuevo elemento -->
+
+                                    <div class="col col-md-12" id="ventana_modal">
+                                        <button type="button" class="btn btn-outline-warning btn-sm mt-3" data-bs-toggle="modal" data-bs-target="#exampleModalElements" style="float: right;" title="Registrar ahora">
+                                            <i class="fas fa-plus-circle me-1"></i>Registrar
+                                        </button>
+                                        
+                                        <!-- Modal Elementos -->
+                                        <div class="modal fade" id="exampleModalElements" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" aria-labelledby="staticBackdropLabel">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Registrar nuevo elemento</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="card-body col-md-10 mx-auto" id="body_modal">
+                                                        <form action="#" method="POST" class="col-md-11 mx-auto">
+                                                            <h5 class="data_title">Datos del elemento</h5>
+                                                            <div class="form-group mb-3">
+                                                                <input type="number" class="form-control" name="num_serial" id="num_serial" placeholder="Numero Serial" >
+                                                            </div>
+                                                            <div class="form-floating mb-3">
+                                                                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 30px"></textarea>
+                                                                <label for="floatingTextarea2" id="caracteristicas" name="caracteristicas">Caracteristicas...</label>
+                                                            </div>
+                                                            <div class="form-group mb-3">
+                                                                <input type="number" class="form-control" name="marca" id="marca" placeholder="Marca" >
+                                                            </div>
+                                                            <div class="form-group mb-3">
+                                                                <input type="text" class="form-control" name="modelo" id="modelo" placeholder="Modelo" >
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Salir</button>
+                                                    <button type="button" class="btn btn-success" onclick="Registrar_elemento();">Registrar</button>
+                                                </div>
+                                            </div>
                                         </div>
                                         
                                     </div>
+                                </div>
+                            </div>
+                            <hr style="color: #c0c0c0; border: 1px solid;" class="mx-auto">                           
+                            
+                            <!-- TABLA Elementos ingresados -->
+
+                            <table class="table table-dark table-hover table-bordered">
+                                <thead class="table-dark border-sm">
+                                  <tr class="text-center table-dark" >
+                                    <th scope="col">Tipo Elemento</th>
+                                    <th scope="col">Num_Serial</th>
+                                    <th scope="col">Marca</th>
+                                    <th scope="col">Modelo</th>
+                                    <th scope="col">Admin</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <th scope="row">Portatil</th>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                    <td class="text-center">
+                                        <a href="" title="Seleccionar" class="text-decoration-none">
+                                            <i class="fas fa-check-double me-2 fa-lg"></i>
+                                        </a>
+                                        <a href="" title="Editar" class="text-decoration-none">
+                                            <i class="fas fa-edit me-2 fa-sm" style="color: blanchedalmond;"></i>
+                                        </a>
+                                        <a href="" title="Eliminar" class="text-decoration-none">
+                                            <i class="fas fa-trash-alt fa-sm" style="color: blanchedalmond;"></i>
+                                        </a>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">Cabina</th>
+                                    <td>Jacob</td>
+                                    <td>Thornton</td>
+                                    <td>@fat</td>
+                                    <td  class="text-center">
+                                        <a href="" title="Seleccionar" class="text-decoration-none">
+                                            <i class="fas fa-check-double me-2 fa-lg"></i>
+                                        </a>
+                                        <a href="" title="Editar" class="text-decoration-none">
+                                            <i class="fas fa-edit me-2 fa-sm" style="color: blanchedalmond;"></i>
+                                        </a>
+                                        <a href="" title="Eliminar" class="text-decoration-none">
+                                            <i class="fas fa-trash-alt fa-sm" style="color: blanchedalmond;"></i>
+                                        </a>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                            </table>
+                            <div class="form-group mb-3">
+                                <h5 class="data_title">Horario</h5>
+                                <div class="row">
                                     <div class="col">
-                                        <div class="form-group mb-3">
-                                            <input type="number" class="form-control" name="serial" placeholder="Numero Serial" >
-                                        </div>
-                                        <div class="form-group mb-3">
-                                            <input type="text" class="form-control" name="marca" placeholder="Ingresa la marca" >
-                                        </div>
-                                        <div class="form-group mb-3">
-                                            <input type="text" class="form-control" name="modelo" placeholder="Modelo" >
-                                        </div>
-                                        <div class="form-group mb-3" id="img_elements">
-                                            <img src="" alt="foto">
-                                        </div>
+                                        <input type="text" class="form-control" name="hora" placeholder="Hora">
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" class="form-control" name="fecha" placeholder="Dia/Mes/Año">
+                                    </div>
+                                    <div class="col">
+                                        <select class="form-select" aria-label="Default select example">
+                                            <option selected>Seleccionar</option>
+                                            <option value="1">Entrada</option>
+                                            <option value="2">Salida</option>
+                                        </select>
                                     </div>
                                 </div>
-                            </form>
-                        </div>
+                            </div>
+                        </div>                        
                     </div>
-                    <button type="submit" class="btn btn-primary mx-auto" style="width: 100px;" id="btn_register">
-                        Registrar
-                    </button>
+                   
+                    
                 </div>
             </div>
-            
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button type="submit" class="btn btn-outline-success m-4 " id="btn_register">
+                    <i class="fas fa-save me-2"></i>Guardar
+                </button>
+            </div>
         </div>
     </div>
 
@@ -163,3 +256,67 @@
    
   </body>
 </html>
+
+
+<script>
+
+function Registrar_persona(){
+
+var tipo_documento = document.getElementById('tipo_documento').value;
+console.log(tipo_documento);
+var numero_documento = document.getElementById('numero_documento').value;
+var nombres = document.getElementById('nombres').value;
+var apellidos = document.getElementById('apellidos').value;
+var telefono = document.getElementById('telefono').value;
+var tipo_persona = document.getElementById('tipo_persona').value;
+
+const datos = new URLSearchParams();
+
+datos.append('tipo_documento', tipo_documento);
+datos.append('numero_documento', numero_documento);
+datos.append('nombres', nombres);
+datos.append('apellidos', apellidos);
+datos.append('telefono', telefono);
+datos.append('tipo_persona', tipo_persona);
+
+fetch('registro/Registrar_persona',{
+  method: 'POST',
+  body:datos
+})
+.then(resp=>resp.text())
+.then(data=>{
+    document.getElementById('smg');
+})
+
+}
+
+// Registrar elementos
+
+function Registrar_elemento(){
+
+var num_serial = document.getElementById('num_serial').value;
+var caracteristicas = document.getElementById('caracteristicas').value;
+var marca = document.getElementById('marca').value;
+var modelo = document.getElementById('modelo').value;
+
+
+const datos = new URLSearchParams();
+
+datos.append('num_serial', num_serial);
+datos.append('caracteristicas', caracteristicas);
+datos.append('marca', marca);
+datos.append('modelo', modelo);
+
+
+fetch('registro/Registrar_elemento',{
+  method: 'POST',
+  body:datos
+})
+.then(resp=>resp.text())
+.then(data=>{
+    document.getElementById('smg');
+})
+
+}
+
+</script>

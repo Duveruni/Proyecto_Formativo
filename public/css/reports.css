@@ -1,0 +1,12 @@
+.card{
+    border-radius: 7px !important;
+    border: 1px solid #EE7912;
+    background-color: #ee791204 !important;
+    min-height: 500px;
+}
+
+.card .card-header{
+    background-color: #FF5800 !important;
+    border-radius: 7px !important;
+    text-align: center;
+}

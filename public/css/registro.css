@@ -1,0 +1,11 @@
+body{
+    background-color: blue;
+}
+
+h1{
+    text-align: center;
+}
+
+.card .card-header{
+    background-color: blueviolet;
+}

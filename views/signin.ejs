@@ -20,19 +20,19 @@
     <link rel="stylesheet" href="css/register_elements.css">
   </head>
   <body>
-    <%- include('navbar') %>
+    <!-- <%- include('navbar') %> -->
     <div class="container">
         <div class="row mt-4">
             <div class="col-md-4 mx-auto">
                 <div class="card" id="card_signin">
                     <div class="card-header">
-                        Account Login
+                        <h4>Iniciar Sesión</h4>
                     </div>
                     <img src="/img/logo.jpg" alt="logo" class="rounded-circle mx-auto d-block m-4" id="logo">
                     <div class="card-body">
                         <form action="/users/signin" method="POST">
                             <div class="form-group mb-3">
-                                <input type="email" class="form-control" name="email" placeholder="Email">
+                                <input type="email" class="form-control" name="email" placeholder="Nombre usuario">
                             </div>
                             <div class="form-group mb-3">
                                 <input type="password" class="form-control" name="password" placeholder="Password">
