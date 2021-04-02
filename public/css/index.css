@@ -1,0 +1,20 @@
+body{
+    background-color: rgb(202, 202, 202);
+}
+
+#carouselExampleCaptions{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+#navbar{
+    background-color: #02757C;
+}
+
+#navbarText ul li a{
+    color: #FF5800;  
+    font-family: 'Noto Sans JP', sans-serif;
+    
+}
+
+.nav-item{
+    visibility:hidden;
+}

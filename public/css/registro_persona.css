@@ -11,4 +11,6 @@
 li:hover {
     background-color: #0bbac4ea;
 }
-
+.nav-item{
+    visibility:hidden;
+}

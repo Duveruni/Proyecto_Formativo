@@ -1,10 +1,13 @@
 const express = require('express');
-const Ruta_reports = express.Router();
+const Ruta_reportes = express.Router();
 const conexion = require('../conexion_BBDD.js');
+const { response } = require('express');
 
 
-Ruta_reports.get('/reports', (req, res) => {
-    respuesta.render('reports');
-})
+Ruta_reportes.get('/reports', (req, res) => {
+    res.render('reports');
 
-module.exports = Ruta_reports;
+    
+});
+
+module.exports = Ruta_reportes;

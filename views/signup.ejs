@@ -14,10 +14,11 @@
     <!-- FONTS GOOGLE -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
-
+    
+    <link rel="stylesheet" href="/css/registro_persona.css" type="text/css">
 
     <title>Hello, world!</title>
-    <link rel="stylesheet" href="css/register_elements.css">
+    
   </head>
   <body>
     <%- include('navbar') %>
@@ -29,31 +30,37 @@
                         Registrarme
                     </div>
                     <div class="card-body">
-                        <form action="#" method="POST">
+                        <form action="/signin" method="POST">
                             <div class="form-group mb-3">
-                                <input type="text" class="form-control" name="nombres" placeholder="Nombres">
+                                <input type="text" class="form-control" name="identificacion" id="identificacion" placeholder="Identificacion">
                             </div>
                             <div class="form-group mb-3">
-                                <input type="text" class="form-control" name="apellidos" placeholder="Apellidos">
+                                <input type="text" class="form-control" name="nombres" id="nombres" placeholder="Nombres">
                             </div>
                             <div class="form-group mb-3">
-                                <input type="text" class="form-control" name="username" placeholder="Nombre de usuario">
+                                <input type="text" class="form-control" name="apellidos" id="apellidos" placeholder="Apellidos">
                             </div>
                             <div class="form-group mb-3">
-                                <input type="email" class="form-control" name="email" placeholder="Email">
+                                <input type="text" class="form-control" name="usuario" id="usuario" placeholder="Usuario">
                             </div>
                             <div class="form-group mb-3">
-                                <input type="password" class="form-control" name="password" placeholder="Contraseña">
+                                <input type="text" class="form-control" name="contraseña" id="contraseña" placeholder="Contraseña">
                             </div>
-                            <button class="btn btn-primary btn-block">
-                                Signup
-                            </button>
+                            <div class="mb-3 text-center">
+                            <button type="button" class="btn btn-success" onclick="Registrar_Usuario();">Registrarme</button>
+                            <div id="msg"></div>
+                            </div>
+                              
+                    
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+
+   
 
 
 
@@ -69,3 +76,39 @@
    
   </body>
 </html>
+<script>
+
+
+function Registrar_Usuario(){
+
+
+var ident=document.getElementById('identificacion').value;
+var nombre=document.getElementById('nombres').value;
+var apellido=document.getElementById('apellidos').value;
+var usuario=document.getElementById('usuario').value;
+var contraseña=document.getElementById('contraseña').value;
+
+const datos=new URLSearchParams();
+
+datos.append('identificacion',ident);
+datos.append('nombres', nombre);
+datos.append('apellidos',apellido);
+datos.append('usuario',usuario);
+datos.append('contraseña',contraseña);
+
+fetch('/users/signup',
+
+{ method:'POST',
+  body:datos
+})
+.then(resp=>resp.text())
+.then(data=>{
+           
+            console.log("msg");
+            document.getElementById("msg").innerHTML="<div class='alert alert-info' role='alert' >se registro el usuario con exito!!!</div>";
+            
+           })          
+}
+
+
+</script>
