@@ -1,3 +1,4 @@
+/* NAVEGACION */
 #nav_header{
     background-color: #FF5800;
     height: 50px !important;
@@ -113,8 +114,14 @@ h4{
     margin: 18px auto;
 }
 
+
 /* SIGNIN */
 #card_signin{
     height: 200px !important;
     border: none;
 }
+
+
+/* #validar{
+    visibility: hidden;
+} */

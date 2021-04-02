@@ -18,20 +18,26 @@
     <link rel="stylesheet" href="/css/registro_persona.css" type="text/css">
 
     <title>Hello, world!</title>
+<<<<<<< HEAD
     
+=======
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="css/register_elements.css">
+>>>>>>> f4c72fe9b5dbe1705bdfd04f0d793556ccd4f24c
   </head>
   <body>
-    <%- include('navbar') %>
+    <!-- <%- include('navbar') %> -->
     <div class="container">
         <div class="row mt-4">
             <div class="col-md-4 mx-auto">
                 <div class="card">
                     <div class="card-header">
-                        Registrarme
+                        <h4>Registrarme</h4>
                     </div>
                     <div class="card-body">
                         <form action="/signin" method="POST">
                             <div class="form-group mb-3">
+<<<<<<< HEAD
                                 <input type="text" class="form-control" name="identificacion" id="identificacion" placeholder="Identificacion">
                             </div>
                             <div class="form-group mb-3">
@@ -45,6 +51,21 @@
                             </div>
                             <div class="form-group mb-3">
                                 <input type="text" class="form-control" name="contraseña" id="contraseña" placeholder="Contraseña">
+=======
+                                <input type="text" class="form-control" name="identificacion" placeholder="Identificacion" id="identificacion">
+                            </div>
+                            <div class="form-group mb-3">
+                                <input type="text" class="form-control" name="nombres" placeholder="Nombres" id="nombres">
+                            </div>
+                            <div class="form-group mb-3">
+                                <input type="text" class="form-control" name="apellidos" placeholder="Apellidos" id="apellidos">
+                            </div>
+                            <div class="form-group mb-3">
+                                <input type="text" class="form-control" name="username" placeholder="Nombre de usuario" id="username">
+                            </div>
+                            <div class="form-group mb-3">
+                                <input type="password" class="form-control" name="password" placeholder="Contraseña" id="password">
+>>>>>>> f4c72fe9b5dbe1705bdfd04f0d793556ccd4f24c
                             </div>
                             <div class="mb-3 text-center">
                             <button type="button" class="btn btn-success" onclick="Registrar_Usuario();">Registrarme</button>
@@ -59,11 +80,14 @@
         </div>
     </div>
 
+<<<<<<< HEAD
 
    
 
 
 
+=======
+>>>>>>> f4c72fe9b5dbe1705bdfd04f0d793556ccd4f24c
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
@@ -76,6 +100,7 @@
    
   </body>
 </html>
+<<<<<<< HEAD
 <script>
 
 
@@ -108,6 +133,37 @@ fetch('/users/signup',
             document.getElementById("msg").innerHTML="<div class='alert alert-info' role='alert' >se registro el usuario con exito!!!</div>";
             
            })          
+=======
+
+<script>
+
+function Registrar_persona(){
+
+    var ident= document.getElementById('identificacion').value;
+    var nomb = document.getElementById('nombres').value;
+    var apel = document.getElementById('apellidos').value;
+    var usern = document.getElementById('username').value;
+    var pass = document.getElementById('password').value;
+
+    const datos = new URLSearchParams();
+
+    datos.append('identificacion', ident);
+    datos.append('nombres', nomb);
+    datos.append('apellidos', apel);
+    datos.append('username', usern);
+    datos.append('password', pass);
+
+    fetch('users/signup',{
+    method: 'POST',
+    body:datos
+    })
+    .then(resp=>resp.text())
+    .then(data=>{
+        
+        document.getElementById('smg').innerHTML=`<div class="alert alert-warning" role="alert">${data}</div>`;
+    })
+
+>>>>>>> f4c72fe9b5dbe1705bdfd04f0d793556ccd4f24c
 }
 
 
