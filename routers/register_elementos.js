@@ -2,6 +2,14 @@ const express = require('express');
 const Ruta_registro = express.Router();
 const conexion = require('../conexion_BBDD.js');
 
+function validar(peticion, respuesta, next){
+    if(peticion.session.usuario_id){
+        next();
+    }else{
+        respuesta.redirect('/users/signin');
+    }
+}
+
 Ruta_registro.get('/register_elements', (req, res) => {
     res.render('register_elements');
 })

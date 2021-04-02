@@ -17,6 +17,7 @@
 
 
     <title>Hello, world!</title>
+    <link rel="stylesheet" href="/css/navbar.css">
     <link rel="stylesheet" href="css/register_elements.css">
   </head>
   <body>
@@ -31,16 +32,19 @@
                     <div class="card-body">
                         <form action="#" method="POST">
                             <div class="form-group mb-3">
-                                <input type="text" class="form-control" name="nombres" placeholder="Nombres">
+                                <input type="text" class="form-control" name="identificacion" placeholder="Identificacion" id="identificacion">
                             </div>
                             <div class="form-group mb-3">
-                                <input type="text" class="form-control" name="apellidos" placeholder="Apellidos">
+                                <input type="text" class="form-control" name="nombres" placeholder="Nombres" id="nombres">
                             </div>
                             <div class="form-group mb-3">
-                                <input type="text" class="form-control" name="username" placeholder="Nombre de usuario">
+                                <input type="text" class="form-control" name="apellidos" placeholder="Apellidos" id="apellidos">
                             </div>
                             <div class="form-group mb-3">
-                                <input type="password" class="form-control" name="password" placeholder="Contraseña">
+                                <input type="text" class="form-control" name="username" placeholder="Nombre de usuario" id="username">
+                            </div>
+                            <div class="form-group mb-3">
+                                <input type="password" class="form-control" name="password" placeholder="Contraseña" id="password">
                             </div>
                             <button class="btn btn-primary btn-block">
                                 Signup
@@ -64,3 +68,36 @@
    
   </body>
 </html>
+
+<script>
+
+function Registrar_persona(){
+
+    var ident= document.getElementById('identificacion').value;
+    var nomb = document.getElementById('nombres').value;
+    var apel = document.getElementById('apellidos').value;
+    var usern = document.getElementById('username').value;
+    var pass = document.getElementById('password').value;
+
+    const datos = new URLSearchParams();
+
+    datos.append('identificacion', ident);
+    datos.append('nombres', nomb);
+    datos.append('apellidos', apel);
+    datos.append('username', usern);
+    datos.append('password', pass);
+
+    fetch('users/signup',{
+    method: 'POST',
+    body:datos
+    })
+    .then(resp=>resp.text())
+    .then(data=>{
+        
+        document.getElementById('smg').innerHTML=`<div class="alert alert-warning" role="alert">${data}</div>`;
+    })
+
+}
+
+
+</script>

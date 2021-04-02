@@ -31,26 +31,32 @@
               <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                   <li class="nav-item">
-                    <a class="nav-link active " aria-current="page" href="/"> <i class="fas fa-home"></i> Inicio</a>
+                    <a class="nav-link active" aria-current="page" href="/" id="items_nav"> <i class="fas fa-home"></i> Inicio</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link " href="/registro/register_elements"> <i class="fas fa-plus"></i> Registrar Ingreso</a>
+                    <a class="nav-link " href="/registro/register_elements" id="items_nav"> <i class="fas fa-plus"></i> Registrar Ingreso</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="/reportes/reports"> <i class="far fa-clipboard"></i> Reportes</a>
+                    <a class="nav-link" href="/reportes/reports" id="items_nav"> <i class="far fa-clipboard"></i> Reportes</a>
                   </li>
+                  
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="me-3 ">
+
+                <ul class="nav navbar-nav navbar-right" >
+                    <li class="nav-item" id="cerrar_sesion">
+                      <a class="nav-link" href="/users/logout" > <i class="far fa-clipboard"></i> Cerrar Sesion</a>
+                    </li>
+                    <li class="me-3 " id="validar">
                         <a class="text-decoration-none" href="/users/signup">
-                            <i class="fas fa-user-plus fa-lg"></i>
+                            <i class="fas fa-user-plus fa-lg mt-3 me-2"></i>Registrarse
                         </a>
                     </li>
-                    <li class="me-3">
+                    <li class="me-3" id="validar">
                         <a class="text-decoration-none" href="/users/signin">
-                            <i class="fas fa-sign-in-alt fa-lg"></i>
+                            <i class="fas fa-sign-in-alt fa-lg mt-3 me-2"></i>Iniciar Sesion
                         </a>
                     </li>
+                    
                   </ul>
               </div>
             </div>
