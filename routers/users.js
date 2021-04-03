@@ -2,13 +2,13 @@ const express = require('express');
 const Ruta_users = express.Router();
 const conexion = require('../conexion_BBDD.js');
 
-function validar(peticion, respuesta, next){
-    if(peticion.session.usuario_id){
-        next();
-    }else{
-        respuesta.redirect('/users/signin');
-    }
-}
+//function validar(peticion, respuesta, next){
+  //  if(peticion.session.usuario_id){
+//        next();
+ //   }else{
+//        respuesta.redirect('/users/signin');
+//    }
+//}
 
 
 Ruta_users.get('/signup', (req, res) => {
@@ -40,8 +40,8 @@ Ruta_users.get('/signin', (req, res) => {
 
 Ruta_users.post('/signin', (req, res) => {
     
-    var usern = req.body.username;
-    var pass = req.body.password;
+    var usern = req.body.usuario;
+    var pass = req.body.contraseña;
 
     var sql = `select * from usuarios where usuario=${usern} and contraseña=${pass}`;
     conexion.query(sql,(err,rows,fields) => {

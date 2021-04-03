@@ -5,7 +5,6 @@ body{
 #carouselExampleCaptions{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-<<<<<<< HEAD
 #navbar{
     background-color: #02757C;
 }
@@ -19,13 +18,3 @@ body{
 .nav-item{
     visibility:hidden;
 }
-=======
-
-/* #items_nav{
-    visibility: hidden;
-}
-
-#cerrar_sesion{
-    visibility: hidden;
-} */
->>>>>>> f4c72fe9b5dbe1705bdfd04f0d793556ccd4f24c

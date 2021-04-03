@@ -3,7 +3,6 @@
 }
 
 #navbarText ul li a{
-<<<<<<< HEAD
     color: #FF5800;  
     font-family: 'Noto Sans JP', sans-serif;
     
@@ -13,13 +12,3 @@ li:hover {
     background-color: #0bbac4ea;
 }
 
-=======
-    color: #FF5800;
-    height: 100%;
-    font-family: 'Noto Sans JP', sans-serif;
-}
-
-li a:hover{
-    background-color: rgb(255, 219, 219);
-}
->>>>>>> f4c72fe9b5dbe1705bdfd04f0d793556ccd4f24c

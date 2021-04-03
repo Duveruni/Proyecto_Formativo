@@ -23,6 +23,7 @@ Servidor.use(session({
 Servidor.use(express.static(__dirname+'/public'));
 
 Servidor.get('/', (peticion, respuesta)=>{
+    
     respuesta.render('index');
 });
 

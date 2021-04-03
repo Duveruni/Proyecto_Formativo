@@ -1,11 +1,14 @@
-body{
-    background-color: blue;
+#navbar{
+    background-color: #02757C;
 }
 
-h1{
-    text-align: center;
+#navbarText ul li a{
+    color: #FF5800;  
+    font-family: 'Noto Sans JP', sans-serif;
+    
 }
 
-.card .card-header{
-    background-color: blueviolet;
+.nav-item{
+    visibility:hidden;
 }
+
