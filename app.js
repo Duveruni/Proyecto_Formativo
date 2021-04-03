@@ -1,7 +1,10 @@
 const express = require('express');
 const body_parser = require('body-parser');
 const session = require('express-session');
-const Ruta_registro = require('./routers/register_elementos');
+
+//rutas de los modulos
+const Ruta_home = require('./routers/home');
+const Ruta_registro = require('./routers/registros');
 const Ruta_reports = require('./routers/reports');
 const Ruta_users = require('./routers/users');
 const Ruta_help = require('./routers/help');
@@ -26,6 +29,7 @@ Servidor.get('/', (peticion, respuesta)=>{
     respuesta.render('index');
 });
 
+Servidor.use('/home', Ruta_home);
 Servidor.use('/registro', Ruta_registro);
 Servidor.use('/reportes', Ruta_reports);
 Servidor.use('/users', Ruta_users);

@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <!-- Required meta tags -->
@@ -47,7 +47,7 @@
                                 <div class="col col-md-5">
                                     <div class="input-group mb-3">    
                                         <input type="number" class="form-control" placeholder="Numero de documento" aria-label="number" aria-describedby="basic-addon1">
-                                        <a href="" title="Buscar persona"><span class="input-group-text" id="basic-addon1"><i class="fas fa-search fa-lg mt-2"></i></span></a>
+                                        <a href="" title="Buscar persona" onclick="consultar_numero();"><span class="input-group-text" id="basic-addon1"><i class="fas fa-search fa-lg mt-2"></i></span></a>
                                     </div>
                                 </div>
                                 <div class="col col-md-3" id="ventana_modal">
@@ -65,7 +65,7 @@
                                             </div>
                                             <div class="modal-body">
                                                 <div class="card-body col-md-10 mx-auto" id="body_modal">
-                                                    <form action="#" method="POST" class="col-md-11 mx-auto">
+                                                    <form action="registro/register_people" method="POST" class="col-md-11 mx-auto">
                                                         <h5 class="data_title">Datos personales</h5>
                                                         <div class="form-group mb-3">
                                                             <select class="form-select" aria-label="Default select example" id="tipo_documento">
@@ -76,13 +76,13 @@
                                                             </select>
                                                         </div>
                                                         <div class="form-group mb-3" >
-                                                            <input type="number" class="form-control"  name="surname" placeholder="Numero de documento" id="numero_documento">
+                                                            <input type="number" class="form-control"  name="numero_documento" placeholder="Numero de documento" id="numero_documento">
                                                         </div>
                                                         <div class="form-group mb-3 mt-2">
-                                                            <input type="text" class="form-control" name="username" placeholder="Nombres" id="nombres">
+                                                            <input type="text" class="form-control" name="nombres" placeholder="Nombres" id="nombres">
                                                         </div>
                                                         <div class="form-group mb-3">
-                                                            <input type="text" class="form-control" name="email" placeholder="Apellidos" id="apellidos">
+                                                            <input type="text" class="form-control" name="apellidos" placeholder="Apellidos" id="apellidos">
                                                         </div>
                                                         <div class="form-group mb-3">
                                                             <input type="text" class="form-control" name="telefono" placeholder="Telefono" id="telefono">
@@ -100,11 +100,15 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Salir</button>
-                                                <button type="button" class="btn btn-success" onclick="Registrar_persona();">Registrar</button>
+                                                <a href=""><button type="button" class="btn btn-success" onclick="Registrar_persona();" id="btnGuardarPersona">Registrar</button></a>
                                             </div>
                                         </div>
                                     </div>
                                     
+                                </div>
+                                <div id="msg"></div>
+                                <div id="Datos_persona">
+                                    <!-- Datos ocultos Autorellenados -->
                                 </div>
                             </div>
                         </div>
@@ -231,6 +235,7 @@
                             </div>
                         </div>                        
                     </div>
+                    <button onclick="Listar_personas();">Listar_p</button>
                    
                     
                 </div>
@@ -261,33 +266,56 @@
 
 <script>
 
+
+function consultar_numero(){
+
+
+    const datos = new URLSearchParams();
+
+    datos.append('identificacion', numero_documento);
+
+    console.log(datos);
+    fetch('registro/consultar_documento',{
+    method: 'post',
+    body:datos
+    })
+    .then(resp=>resp.text())
+    .then(data=>{
+        console.log(datos)
+    })
+
+}
+
+
+    
 function Registrar_persona(){
 
-var tipo_documento = document.getElementById('tipo_documento').value;
-console.log(tipo_documento);
-var numero_documento = document.getElementById('numero_documento').value;
-var nombres = document.getElementById('nombres').value;
-var apellidos = document.getElementById('apellidos').value;
-var telefono = document.getElementById('telefono').value;
-var tipo_persona = document.getElementById('tipo_persona').value;
+var tipo_doc = document.getElementById('tipo_documento').value;
+var numero_doc = document.getElementById('numero_documento').value;
+var nomb = document.getElementById('nombres').value;
+var apel = document.getElementById('apellidos').value;
+var tel = document.getElementById('telefono').value;
+var tipo_per = document.getElementById('tipo_persona').value;
 
 const datos = new URLSearchParams();
 
-datos.append('tipo_documento', tipo_documento);
-datos.append('numero_documento', numero_documento);
-datos.append('nombres', nombres);
-datos.append('apellidos', apellidos);
-datos.append('telefono', telefono);
-datos.append('tipo_persona', tipo_persona);
+datos.append('tipo_documento', tipo_doc);
+datos.append('numero_documento', numero_doc);
+datos.append('nombres', nomb);
+datos.append('apellidos', apel);
+datos.append('telefono', tel);
+datos.append('tipo_persona', tipo_per);
 
-fetch('registro/Registrar_persona',{
-  method: 'POST',
-  body:datos
-})
-.then(resp=>resp.text())
-.then(data=>{
-    document.getElementById('smg');
-})
+    fetch('/registro/register_people',{
+    method: 'post',
+    body:datos
+    })
+    .then(resp=>resp.text())
+    .then(data=>{
+        
+        document.getElementById('smg').innerHTML=`<div class="alert alert-success" role="alert">E registro correctamente<strong>`;
+        
+    })
 
 }
 
@@ -318,6 +346,20 @@ fetch('registro/Registrar_elemento',{
     document.getElementById('smg');
 })
 
+}
+
+
+
+function Listar_personas(){
+  
+  fetch('/registro/Listar_personas', {
+    method: 'get'
+  })
+  .then(resp=>resp.json())
+  .then(data=>{
+    console.log(data)
+    document.getElementById('smg').innerHTML=`<div class="alert alert-success" role="alert">E registro correctamente<strong>`;
+    })
 }
 
 </script>

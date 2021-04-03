@@ -13,7 +13,7 @@
 
     <!-- FONTS GOOGLE -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300&display=swap" rel="stylesheet">
 
 
     <title>Hello, world!</title>
@@ -21,7 +21,6 @@
     <link rel="stylesheet" href="/css/signin.css">
   </head>
   <body>
-    <%- include('navbar') %>
     <div class="container">
         <div class="row mt-4">
             <div class="col-md-4 mx-auto">
@@ -29,19 +28,26 @@
                     <div class="card-header">
                         <h4>Iniciar Sesión</h4>
                     </div>
-                    <img src="/img/logo.jpg" alt="logo" class="rounded-circle mx-auto d-block m-4" id="logo">
+                    <div id="titulo_sistema">
+                        <h3 class="mt-2 ms-3">Sistema</h3>
+                        <h2 class="mt-2 ms-3">Ingreso de Elementos</h2>
+                    </div>
+                    <img src="/img/cabezote.png" alt="logo" class="rounded-circle mx-auto d-block" id="logo">
                     <div class="card-body">
-                        <form action="/users/signin" method="POST">
-                            <div class="form-group mb-3">
+                        <form action="/users/signin" method="POST" class="col-md-11 mx-auto">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-user-tie"></i></span>
                                 <input type="text" class="form-control" name="username" placeholder="Nombre usuario" id="username">
                             </div>
-                            <div class="form-group mb-3">
-                                <input type="password" class="form-control" name="password" placeholder="Password" id="password">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-key"></i></span>
+                                <input type="password" class="form-control" name="password" placeholder="Contraseña" id="password">
                             </div>
                             <button class="btn btn-primary btn-block">
-                                Signup
+                                Signin
                             </button>
                         </form>
+                        <a href="/users/signup" class="mt-1">Aun no tengo una cuenta</a>
                     </div>
                 </div>
             </div>

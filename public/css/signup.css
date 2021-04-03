@@ -1,0 +1,17 @@
+body{
+    font-family: 'Noto Sans JP', sans-serif;
+    background-image: url('/img/sena_empresa.JPG');
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+.card{
+    margin-top: 25%;
+    border-radius: 10px;
+}
+
+.card-body a{
+    float: right;
+    letter-spacing: 1px;
+    text-decoration: none;
+}

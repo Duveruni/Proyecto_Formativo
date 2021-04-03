@@ -2,11 +2,11 @@ const express = require('express');
 const Ruta_users = express.Router();
 const conexion = require('../conexion_BBDD.js');
 
-function validar(peticion, respuesta, next){
-    if(peticion.session.usuario_id){
+function validar(req, res, next){
+    if(req.session.id_usuario){
         next();
     }else{
-        respuesta.redirect('/users/signin');
+        res.redirect('/users/signin');
     }
 }
 
@@ -39,7 +39,7 @@ Ruta_users.get('/signin', (req, res) => {
 })
 
 Ruta_users.post('/signin', (req, res) => {
-    
+
     var usern = req.body.username;
     var pass = req.body.password;
 
@@ -47,9 +47,10 @@ Ruta_users.post('/signin', (req, res) => {
     conexion.query(sql,(err,rows,fields) => {
         
         if(!err){
-            req.session.usuario_id=rows;
-            if(req.session.usuario_id.length>0) {
-                res.redirect('/registro/register_elements')
+            req.session.id_usuario=rows;
+            console.log(rows);
+            if(req.session.id_usuario.length>0) {
+                res.redirect('/registro/registros')
             }
             
         }else{
