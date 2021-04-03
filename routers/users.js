@@ -20,10 +20,10 @@ Ruta_users.post('/signup', (req, res) => {
     var ident = req.body.identificacion;
     var nomb = req.body.nombres;
     var apel = req.body.apellidos;
-    var usern = req.body.username;
-    var pass = req.body.password;
+    var usern = req.body.usuario;
+    var pass = req.body.contraseña;
 
-    var sql = `insert into usuarios(identificacion,nombres,apellidos,nombre_Usuario,password) values ('${ident}','${nomb}','${apel}','${usern}','${pass}')`;
+    var sql = `insert into usuarios(identificacion,nombres,apellidos,usuario,contraseña) values ('${ident}','${nomb}','${apel}','${usern}','${pass}')`;
     conexion.query(sql,(err,rows,fields) => {
         if(!err){
             res.redirect('/users/signin')
@@ -43,7 +43,7 @@ Ruta_users.post('/signin', (req, res) => {
     var usern = req.body.username;
     var pass = req.body.password;
 
-    var sql = `select * from usuarios where nombre_Usuario=${usern} and password=${pass}`;
+    var sql = `select * from usuarios where usuario=${usern} and contraseña=${pass}`;
     conexion.query(sql,(err,rows,fields) => {
         
         if(!err){

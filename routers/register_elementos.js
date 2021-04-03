@@ -2,8 +2,6 @@ const express = require('express');
 const Ruta_registro = express.Router();
 const conexion = require('../conexion_BBDD.js');
 
-<<<<<<< HEAD
-=======
 function validar(peticion, respuesta, next){
     if(peticion.session.usuario_id){
         next();
@@ -12,7 +10,6 @@ function validar(peticion, respuesta, next){
     }
 }
 
->>>>>>> f4c72fe9b5dbe1705bdfd04f0d793556ccd4f24c
 Ruta_registro.get('/register_elements', (req, res) => {
     res.render('register_elements');
 })

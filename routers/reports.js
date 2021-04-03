@@ -1,7 +1,6 @@
 const express = require('express');
-const Ruta_reportes = express.Router();
+const Ruta_reports = express.Router();
 const conexion = require('../conexion_BBDD.js');
-const { response } = require('express');
 
 function validar(peticion, respuesta, next){
     if(peticion.session.usuario_id){
@@ -12,10 +11,8 @@ function validar(peticion, respuesta, next){
 }
 
 
-Ruta_reportes.get('/reports', (req, res) => {
+Ruta_reports.get('/reports', (req, res) => {
     res.render('reports');
+})
 
-    
-});
-
-module.exports = Ruta_reportes;
+module.exports = Ruta_reports;
