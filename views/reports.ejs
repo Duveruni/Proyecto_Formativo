@@ -11,6 +11,19 @@
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
 
+
+    <!-- export DataTable -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.html5.min.js"></script>  
+    <script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.print.min.js
+    "></script>
+
+
     <title>Hello, world!</title>
     <link rel="stylesheet" href="/css/navbar.css">
     <link rel="stylesheet" href="css/reports.css">
@@ -27,72 +40,80 @@
                     <div class="card-header">
                         <h4>Generar reporte</h4>
                     </div>
-                    <div class="card-body">
+                    <!-- <div class="card-body col-md-9">
                         <form action="#" method="POST">
-                            
-                            <div class="form-group col-md-5 mb-3">
-                                <label for="">Desde</label>
-                                <input type="date" class="form-control" name="desde">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group mb-3">
+                                        <label for="">Desde</label>
+                                        <input type="date" class="form-control" name="desde">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group mb-3">
+                                        <label for="">Hasta</label>
+                                        <input type="date" class="form-control" name="hasta" >
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-group col-md-5 mb-3">
-                                <label for="">Hasta</label>
-                                <input type="date" class="form-control" name="hasta" >
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group mb-3">
+                                        <input type="text" class="form-control" name="name" placeholder="Nombres">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group mb-3">
+                                        <input type="number" class="form-control" name="email" placeholder="Numero de documento">
+                                        
+                                    </div>   
+                                </div>
+                                <div class="col-md-1">
+                                    <span><a href=""><i class="fas fa-search"></i></a></span>
+                                </div>
                             </div>
-                            <div class="form-group col-md-5 mb-3">
-                                <input type="text" class="form-control" name="name" placeholder="Nombres">
-                            </div>
-                            <div class="form-group col-md-5 mb-3">
-                                <input type="number" class="form-control" name="email" placeholder="Numero de documento">
-                                <span><a href=""><i class="fas fa-search"></i></a></span>
-                            </div>                            
+                                                     
                         </form>
-                    </div>
+                    </div> 
                     <button type="submit" class="btn btn-primary mx-auto" >
                         Generar reporte
                     </button>
-                    <hr>
-                    <div class="col-md-11 mx-auto">
-                        <div>
-                            <header class="mx-auto" style="float: right;">
-                                <select class="form-select" aria-label="Default select example">
-                                    <option selected>Descargar</option>
-                                    <option value="1">.xlsx</option>
-                                    <option value="2">.pdf</option>
-                                    <option value="3">.text</option>
-                                  </select>
-                            </header>
-                        </div>
-                        <table class="table">
-                            <thead>
-                              <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Apellido</th>
-                                <th scope="col">Tipo_pers</th>
-                                <th scope="col">fecha</th>
+                    <hr>-->
+
+                    <!-- <div>
+                      <header class="mx-auto me-4 mb-4" style="float: right;">
+                          <select class="form-select" aria-label="Default select example">
+                              <option selected>Descargar</option>
+                              <option value="1">.xlsx</option>
+                              <option value="2">.pdf</option>
+                              <option value="3">.text</option>
+                            </select>
+                      </header>
+                  </div> -->
+                    <div class="col-md-11 mx-auto mt-3"  style="overflow: scroll; height: auto; width: 95%;">
+                        
+                        <table class="table table-dark table-hover table-bordered" id="tabla_reporte">
+                            <thead class="table-dark border-sm text-center align-middle">
+                              <tr class="border">
+                                <th scope="col">ID</th>
+                                <th scope="col">Tipo documento</th>
+                                <th scope="col">Numero documento</th>
+                                <th scope="col">Nombres</th>
+                                <th scope="col">Apellidos</th>
+                                <th scope="col">Telefono</th>
+                                <th scope="col">Tipo persona</th>
+                                <th scope="col">Nombre Elemento</th>
+                                <th scope="col">Numero serial</th>
+                                <th scope="col">Caracteristicas</th>
+                                <th scope="col">Marca</th>
+                                <th scope="col">Modelo</th>
+                                <th scope="col">Hora</th>
+                                <th scope="col">Fecha</th>
+                                <th scope="col">Entrada/Salida</th>
                               </tr>
                             </thead>
-                            <tbody>
-                              <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td>@mdo</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                                <td>@fat</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">3</th>
-                                <td colspan="2">Larry the Bird</td>
-                                <td>@twitter</td>
-                                <td>@twitter</td>
-                              </tr>
+                            <tbody class="table bg-light">
+                              
                             </tbody>
                           </table>
                     </div>
@@ -115,3 +136,40 @@
    
   </body>
 </html>
+
+
+
+<script>
+
+Generar_Reporte();
+  
+  function Generar_Reporte() {
+      fetch('/reportes/generar_reporte', {
+          method: 'get'
+      })
+      .then(resp => resp.json())
+      .then(datos => {
+          $('#tabla_reporte').DataTable({
+              "paging": true,
+              "pageLength": 10,
+              "responsive":true,
+              "destroy":true,
+              "data":datos,
+              dom: 'Bfrtip',
+              buttons: [
+              'copy', 'csv', 'excel', 'pdf', 'print'
+              ],
+              columns: [
+                  {"data": "id_persona"},
+                  {"data": "identificacion"},
+                  {"data": "nombres"},
+                  {"data": "apellidos"},
+                  {"data": "telefono"},
+                  {"data": "tipo_persona"}
+              ]
+          })
+      })
+  }
+  
+  
+  </script>

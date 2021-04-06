@@ -15,4 +15,19 @@ Ruta_reports.get('/reports', (req, res) => {
     res.render('reports');
 })
 
+
+
+Ruta_reports.get('/generar_reporte', (req, res) => {
+    var sql = 'select * from elemento';
+
+    conexion.query(sql,(err,rows,fields) => {
+        if(!err){
+            res.json(rows);
+        }else{
+            console.log('Error al ejecutar el sql en la BD');
+        }
+    });
+})
+
+
 module.exports = Ruta_reports;

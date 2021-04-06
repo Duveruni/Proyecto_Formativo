@@ -10,25 +10,13 @@ function validar(peticion, respuesta, next){
     }
 }
 
-Ruta_registro.get('/Listar_personas', (req, res) => {
-    var sql = 'select * from persona';
-
-    conexion.query(sql,(err,rows,fields) => {
-        if(!err){
-            res.json(rows);
-        }else{
-            console.log('Error al ejecutar el sql en la BD');
-        }
-    });
-})
 
 // consultar personas
 Ruta_registro.get('/consultar_documento', (req, res) => {
 
-    var ident = req.body.identificacion;
-    var sql = ' SELECT * from persona where identificacion = ' + ident;
-
-    console.log(ident);
+    var ident = peticion.body.identificacion;
+    var sql = 'select nombres, apellidos, telefono, Tipo_persona from persona where identificacion = ' + ident;
+    console.log(sql);
     conexion.query(sql,(err,rows,fields) => {
         if(!err){
             res.json(rows);
@@ -62,6 +50,56 @@ Ruta_registro.post('/register_people',(req, res)=>{
             
         }else{
             console.log('Sucedio un error al hacer el registro. Por favor vuelva a intentarlo nuevamente.' + err);
+        }
+    });
+})
+
+// Registrar elemento
+
+Ruta_registro.post('/register_element',(req, res)=>{
+
+    // var id = req.body.id_elemento;
+    var tip_elemento = req.body.tipo_elemento;
+    var numero_serial = req.body.numero_serial;
+    var caract = req.body.caracteristicas;
+    var marc = req.body.marca;
+    var model = req.body.modelo;
+
+
+    var sql = `insert into elementos(tipo_elemento,num_serial,caracteristicas,marca,modelo) values ('${tip_elemento}','${numero_serial}','${caract}','${marc}','${model}')`;
+    
+    conexion.query(sql,(err,rows,fields) => {
+        if(!err){
+            res.render('register_elements');
+            
+        }else{
+            console.log('Sucedio un error al hacer el registro. Por favor vuelva a intentarlo nuevamente.' + err);
+        }
+    });
+})
+
+Ruta_registro.get('/Listar_elementos', (req, res) => {
+    var sql = 'select * from elementos';
+
+    conexion.query(sql,(err,rows,fields) => {
+        if(!err){
+            res.json(rows);
+        }else{
+            console.log('Error al ejecutar el sql en la BD');
+        }
+    });
+})
+
+Ruta_registro.delete('/Eliminar_elemento',(req, res)=>{
+
+    var id_elemento = req.body.id_elemento;
+
+    var sql = `delete from elementos where id_elemento = '${id_elemento}'`;
+    conexion.query(sql,(err,rows,fields) => {
+        if(!err){
+            res.send('Se elimino correctamente el elemento');
+        }else{
+            console.log('Error al ejecutar el sql en la BD' + err);
         }
     });
 })
