@@ -2,13 +2,13 @@ const express = require('express');
 const Ruta_users = express.Router();
 const conexion = require('../conexion_BBDD.js');
 
-//function validar(peticion, respuesta, next){
-  //  if(peticion.session.usuario_id){
-//        next();
- //   }else{
-//        respuesta.redirect('/users/signin');
-//    }
-//}
+function validar(req, res, next){
+    if(req.session.id_usuario){
+        next();
+    }else{
+       res.redirect('/users/signin');
+   }
+}
 
 
 Ruta_users.get('/signup', (req, res) => {
@@ -20,10 +20,10 @@ Ruta_users.post('/signup', (req, res) => {
     var ident = req.body.identificacion;
     var nomb = req.body.nombres;
     var apel = req.body.apellidos;
-    var usern = req.body.usuario;
-    var pass = req.body.contraseña;
+    var usern = req.body.username;
+    var pass = req.body.password;
 
-    var sql = `insert into usuarios(identificacion,nombres,apellidos,usuario,contraseña) values ('${ident}','${nomb}','${apel}','${usern}','${pass}')`;
+    var sql = `insert into usuarios(identificacion,nombres,apellidos,nombre_usuario,password) values ('${ident}','${nomb}','${apel}','${usern}','${pass}')`;
     conexion.query(sql,(err,rows,fields) => {
         if(!err){
             res.redirect('/users/signin')
@@ -40,16 +40,16 @@ Ruta_users.get('/signin', (req, res) => {
 
 Ruta_users.post('/signin', (req, res) => {
     
-    var usern = req.body.usuario;
-    var pass = req.body.contraseña;
+    var usern = req.body.username;
+    var pass = req.body.password;
 
-    var sql = `select * from usuarios where usuario=${usern} and contraseña=${pass}`;
+    var sql = `select * from usuarios where usuario=${usern} and password=${pass}`;
     conexion.query(sql,(err,rows,fields) => {
         
         if(!err){
             req.session.usuario_id=rows;
             if(req.session.usuario_id.length>0) {
-                res.redirect('/registro/register_elements')
+                res.redirect('/registro/registros')
             }
             
         }else{
