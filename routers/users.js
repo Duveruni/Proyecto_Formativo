@@ -6,8 +6,13 @@ function validar(req, res, next){
     if(req.session.id_usuario){
         next();
     }else{
+<<<<<<< HEAD
        res.redirect('/users/signin');
    }
+=======
+        res.redirect('/users/signin');
+    }
+>>>>>>> 1a92e51d08bcd6094ff9949e171405c356eb4ebb
 }
 
 
@@ -39,7 +44,7 @@ Ruta_users.get('/signin', (req, res) => {
 })
 
 Ruta_users.post('/signin', (req, res) => {
-    
+
     var usern = req.body.username;
     var pass = req.body.password;
 
@@ -47,8 +52,14 @@ Ruta_users.post('/signin', (req, res) => {
     conexion.query(sql,(err,rows,fields) => {
         
         if(!err){
+<<<<<<< HEAD
             req.session.usuario_id=rows;
             if(req.session.usuario_id.length>0) {
+=======
+            req.session.id_usuario=rows;
+            console.log(rows);
+            if(req.session.id_usuario.length>0) {
+>>>>>>> 1a92e51d08bcd6094ff9949e171405c356eb4ebb
                 res.redirect('/registro/registros')
             }
             

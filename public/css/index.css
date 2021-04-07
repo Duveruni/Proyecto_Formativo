@@ -1,14 +1,23 @@
+
 body{
-    background-color: rgb(202, 202, 202);
+    font-family: 'Noto Sans JP', sans-serif;
+    background-image: url('/img/sena_empresa.JPG');
+    background-repeat: no-repeat;
+    background-size: 100%;
 }
 
-#carouselExampleCaptions{
+.container{
+    background: rgba(115, 92, 248, 0.11);
+    margin-top: 2%;
+    min-height: 35rem;
+    border-radius: 10px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 #navbar{
     background-color: #02757C;
 }
 
+<<<<<<< HEAD
 #navbarText ul li a{
     color: #FF5800;  
     font-family: 'Noto Sans JP', sans-serif;
@@ -18,3 +27,53 @@ body{
 .nav-item{
     visibility:hidden;
 }
+=======
+.card{
+    border-radius: 7px;
+    margin-top: 5%;
+    height: 95%;
+    width: 60%;
+    background-color: rgba(255, 255, 255, 0.089);
+}
+
+.card h3{
+    text-align: left;
+    color: #02757C;
+    text-shadow: 2px 2px 4px #000000;
+    /* margin-top: 20%; */
+    line-height: 5px;
+}
+
+.card h1{
+    text-align: left;
+    color: #02757C;
+    text-shadow: 2px 2px 4px #000000;
+    font-size: 5rem;
+    line-height: 75px;
+    font-weight: 800;
+    letter-spacing: 8px;
+    /* margin-top: 5%; */
+}
+
+hr{
+    color: white;
+  text-shadow: 2px 2px 4px #000000;
+}
+
+
+
+.card-footer{
+    float: right;
+}
+
+
+#botones a button{
+    text-align: center;
+    font-weight: 600;
+}
+
+/* .card-body{
+    margin-top: 20%;
+} */
+
+>>>>>>> 1a92e51d08bcd6094ff9949e171405c356eb4ebb

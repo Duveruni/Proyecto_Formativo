@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <!-- Required meta tags -->
@@ -33,7 +33,8 @@
                     </div>
                     <div class="row">  
                         <div class="col-md-12">
-                            <div class="row m-3">
+                            <!-- Identificasion y registro de personas -->
+                            <div class="row m-3">  
                                 <h5 class="data_title">Identificación</h5>
                                 <!-- IDENTIFICACION -->
                                 <div class="col">
@@ -46,8 +47,8 @@
                                 </div>
                                 <div class="col col-md-5">
                                     <div class="input-group mb-3">    
-                                        <input type="number" class="form-control" placeholder="Numero de documento" aria-label="number" aria-describedby="basic-addon1">
-                                        <a href="" title="Buscar persona"><span class="input-group-text" id="basic-addon1"><i class="fas fa-search fa-lg mt-2"></i></span></a>
+                                        <input type="number" class="form-control" placeholder="Numero de documento" aria-label="number" aria-describedby="basic-addon1"  name="identificacion">
+                                        <a href="" title="Buscar persona" onclick="consultar_numero(body.identificacion);"><span class="input-group-text" id="basic-addon1"><i class="fas fa-search fa-lg mt-2" id="identificacion"></i></span></a>
                                     </div>
                                 </div>
                                 <div class="col col-md-3" id="ventana_modal">
@@ -65,7 +66,7 @@
                                             </div>
                                             <div class="modal-body">
                                                 <div class="card-body col-md-10 mx-auto" id="body_modal">
-                                                    <form action="#" method="POST" class="col-md-11 mx-auto">
+                                                    <form action="registro/register_people" method="POST" class="col-md-11 mx-auto">
                                                         <h5 class="data_title">Datos personales</h5>
                                                         <div class="form-group mb-3">
                                                             <select class="form-select" aria-label="Default select example" id="tipo_documento">
@@ -76,13 +77,13 @@
                                                             </select>
                                                         </div>
                                                         <div class="form-group mb-3" >
-                                                            <input type="number" class="form-control"  name="surname" placeholder="Numero de documento" id="numero_documento">
+                                                            <input type="number" class="form-control"  name="numero_documento" placeholder="Numero de documento" id="numero_documento">
                                                         </div>
                                                         <div class="form-group mb-3 mt-2">
-                                                            <input type="text" class="form-control" name="username" placeholder="Nombres" id="nombres">
+                                                            <input type="text" class="form-control" name="nombres" placeholder="Nombres" id="nombres">
                                                         </div>
                                                         <div class="form-group mb-3">
-                                                            <input type="text" class="form-control" name="email" placeholder="Apellidos" id="apellidos">
+                                                            <input type="text" class="form-control" name="apellidos" placeholder="Apellidos" id="apellidos">
                                                         </div>
                                                         <div class="form-group mb-3">
                                                             <input type="text" class="form-control" name="telefono" placeholder="Telefono" id="telefono">
@@ -100,15 +101,59 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Salir</button>
-                                                <button type="button" class="btn btn-success" onclick="Registrar_persona();">Registrar</button>
+                                                <a href=""><button type="button" class="btn btn-success" onclick="Registrar_persona();" id="btnGuardarPersona">Registrar</button></a>
                                             </div>
                                         </div>
                                     </div>
                                     
                                 </div>
+                                
+                            </div>
+                            <div class="col-md-12 rounded" id="Datos_persona">
+                                <!-- Datos ocultos Autorellenados -->
+                                <h3>Resultados de la busqueda</h3>
+                                <div class="row">
+                                    <table class="table table-hover ">
+                                        <thead class="table table-success table-striped border-sm align-middle">
+                                          <tr class="text-center">
+                                            <th scope="col">Tipo Documento</th>
+                                            <th scope="col">Numero Documento</th>
+                                            <th scope="col">Nombres</th>
+                                            <th scope="col">Apellidos</th>
+                                            <th scope="col">Telefono</th>
+                                            <th scope="col">Tipo persona</th>
+                                            <th scope="col" style="width: 13%;">Admin</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          <tr>
+                                            <th scope="row">CC</th>
+                                            <td>1003458292</td>
+                                            <td>Mark</td>
+                                            <td>Lopez</td>
+                                            <td>3212346283</td>
+                                            <td>Instructor</td>
+                                            <td class="text-center">
+                                                <a href="#" title="Seleccionar" class="text-decoration-none">
+                                                    <i class="fas fa-check-double me-2 fa-lg"></i>
+                                                </a>
+                            
+                                                <a href="#" title="Editar" class="text-decoration-none">
+                                                    <i class="fas fa-edit me-2 fa-sm"></i>
+                                                </a>
+                            
+                                                <a href="#" title="Eliminar" class="text-decoration-none">
+                                                    <i class="fas fa-trash-alt fa-sm"></i>
+                                                </a>
+                                            </td>
+                                          </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                         <hr style="color: #FF5800; border: 1px solid; width: 95%;" class="mx-auto">
+                        <!-- registro de nuevos elementos -->
                         <div class="col-md-11 mx-auto mt-3">
                             <div class="row">
                                 <div class="col">
@@ -135,14 +180,18 @@
                                                         <form action="#" method="POST" class="col-md-11 mx-auto">
                                                             <h5 class="data_title">Datos del elemento</h5>
                                                             <div class="form-group mb-3">
-                                                                <input type="number" class="form-control" name="num_serial" id="num_serial" placeholder="Numero Serial" >
-                                                            </div>
-                                                            <div class="form-floating mb-3">
-                                                                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 30px"></textarea>
-                                                                <label for="floatingTextarea2" id="caracteristicas" name="caracteristicas">Caracteristicas...</label>
+                                                                <input type="text" class="form-control" name="elemento" id="tipo_elemento" placeholder="Tipo de Elemento" >
                                                             </div>
                                                             <div class="form-group mb-3">
-                                                                <input type="number" class="form-control" name="marca" id="marca" placeholder="Marca" >
+                                                                <input type="number" class="form-control" name="num_serial" id="numero_serial" placeholder="Numero Serial" >
+                                                            </div>
+                                                            <div class="form-floating mb-3">
+                                                                <label class="form-label mb-3 p-1" style="color: rgb(141, 141, 141);">Caracteristicas...</label>
+                                                                <textarea class="form-control mb-3" placeholder="Caracteristicas" id="caracteristicas" style="height: 60px; font-weight:500;"></textarea>
+                                                                
+                                                            </div>
+                                                            <div class="form-group mb-3">
+                                                                <input type="text" class="form-control" name="marca" id="marca" placeholder="Marca" >
                                                             </div>
                                                             <div class="form-group mb-3">
                                                                 <input type="text" class="form-control" name="modelo" id="modelo" placeholder="Modelo" >
@@ -152,7 +201,7 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Salir</button>
-                                                    <button type="button" class="btn btn-success" onclick="Registrar_elemento();">Registrar</button>
+                                                    <a href=""><button type="button" class="btn btn-success" onclick="Registrar_Elemento();">Registrar</button></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -165,74 +214,52 @@
                             <!-- TABLA Elementos ingresados -->
 
                             <table class="table table-dark table-hover table-bordered">
-                                <thead class="table-dark border-sm">
+                                <thead class="table-dark border-sm align-middle">
                                   <tr class="text-center table-dark" >
-                                    <th scope="col">Tipo Elemento</th>
-                                    <th scope="col">Num_Serial</th>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Tipo elemento</th>
+                                    <th scope="col">Numero Serial</th>
+                                    <th scope="col">Caracteristicas</th>
                                     <th scope="col">Marca</th>
                                     <th scope="col">Modelo</th>
-                                    <th scope="col">Admin</th>
+                                    <th scope="col" style="width: 13%;">Admin</th>
                                   </tr>
                                 </thead>
-                                <tbody>
-                                  <tr>
-                                    <th scope="row">Portatil</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                    <td class="text-center">
-                                        <a href="" title="Seleccionar" class="text-decoration-none">
-                                            <i class="fas fa-check-double me-2 fa-lg"></i>
-                                        </a>
-                                        <a href="" title="Editar" class="text-decoration-none">
-                                            <i class="fas fa-edit me-2 fa-sm" style="color: blanchedalmond;"></i>
-                                        </a>
-                                        <a href="" title="Eliminar" class="text-decoration-none">
-                                            <i class="fas fa-trash-alt fa-sm" style="color: blanchedalmond;"></i>
-                                        </a>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">Cabina</th>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>@fat</td>
-                                    <td  class="text-center">
-                                        <a href="" title="Seleccionar" class="text-decoration-none">
-                                            <i class="fas fa-check-double me-2 fa-lg"></i>
-                                        </a>
-                                        <a href="" title="Editar" class="text-decoration-none">
-                                            <i class="fas fa-edit me-2 fa-sm" style="color: blanchedalmond;"></i>
-                                        </a>
-                                        <a href="" title="Eliminar" class="text-decoration-none">
-                                            <i class="fas fa-trash-alt fa-sm" style="color: blanchedalmond;"></i>
-                                        </a>
-                                    </td>
-                                  </tr>
+                                <tbody id="Elements">
+                                
                                 </tbody>
                             </table>
+
+                            <!-- Ingresos -->
                             <div class="form-group mb-3">
-                                <h5 class="data_title">Horario</h5>
+                                <h5 class="data_title">Ingreso</h5>
                                 <div class="row">
                                     <div class="col">
-                                        <input type="text" class="form-control" name="hora" placeholder="Hora">
+                                        <input type="time" id="HoraActual" class="form-control" name="hora" placeholder="Hora">
                                     </div>
                                     <div class="col">
-                                        <input type="text" class="form-control" name="fecha" placeholder="Dia/Mes/Año">
+                                        <input type="date" id="fechaActual" class="form-control" name="fecha" placeholder="Dia/Mes/Año">
                                     </div>
                                     <div class="col">
-                                        <select class="form-select" aria-label="Default select example">
-                                            <option selected>Seleccionar</option>
-                                            <option value="1">Entrada</option>
-                                            <option value="2">Salida</option>
-                                        </select>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="entrada" id="flexRadioDefault2" checked>
+                                            <label class="form-check-label" for="flexRadioDefault2">
+                                              Entrada
+                                            </label>
+                                        </div>
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="salida" id="flexRadioDefault1">
+                                            <label class="form-check-label" for="flexRadioDefault1">
+                                              Salida
+                                            </label>
+                                        </div>    
                                     </div>
                                 </div>
                             </div>
                         </div>                        
                     </div>
-                   
-                    
+                                        
                 </div>
             </div>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
@@ -261,63 +288,196 @@
 
 <script>
 
+    Elements_id()
+
+
+function consultar_numero(id){
+
+    const datos = new URLSearchParams();
+    datos.append('identificacion', id);
+
+    fetch('registro/consultar_documento',{
+    method: 'get',
+    body: datos
+    })
+    .then(resp=>resp.json())
+    .then(data=>{
+
+        for(var i in data){
+
+            document.getElementById('consult_nombres').value= data[i].nombres;
+            document.getElementById('consult_apellidos').value= data[i].apellidos;
+            document.getElementById('consult_telefono').value= data[i].telefono; 
+            document.getElementById('consult_Tipo_persona').value= data[i].Tipo_persona;
+        }
+    })
+    alert(data)
+
+    
+
+}
+
+    
 function Registrar_persona(){
 
-var tipo_documento = document.getElementById('tipo_documento').value;
-console.log(tipo_documento);
-var numero_documento = document.getElementById('numero_documento').value;
-var nombres = document.getElementById('nombres').value;
-var apellidos = document.getElementById('apellidos').value;
-var telefono = document.getElementById('telefono').value;
-var tipo_persona = document.getElementById('tipo_persona').value;
+var tipo_doc = document.getElementById('tipo_documento').value;
+var numero_doc = document.getElementById('numero_documento').value;
+var nomb = document.getElementById('nombres').value;
+var apel = document.getElementById('apellidos').value;
+var tel = document.getElementById('telefono').value;
+var tipo_per = document.getElementById('tipo_persona').value;
 
 const datos = new URLSearchParams();
 
-datos.append('tipo_documento', tipo_documento);
-datos.append('numero_documento', numero_documento);
-datos.append('nombres', nombres);
-datos.append('apellidos', apellidos);
-datos.append('telefono', telefono);
-datos.append('tipo_persona', tipo_persona);
+datos.append('tipo_documento', tipo_doc);
+datos.append('numero_documento', numero_doc);
+datos.append('nombres', nomb);
+datos.append('apellidos', apel);
+datos.append('telefono', tel);
+datos.append('tipo_persona', tipo_per);
 
-fetch('registro/Registrar_persona',{
-  method: 'POST',
-  body:datos
-})
-.then(resp=>resp.text())
-.then(data=>{
-    document.getElementById('smg');
-})
+    fetch('/registro/register_people',{
+    method: 'post',
+    body:datos
+    })
+    .then(resp=>resp.text())
+    .then(data=>{
+        
+        document.getElementById('smg').innerHTML=`<div class="alert alert-success" role="alert">E registro correctamente<strong>`;
+        
+    })
 
 }
 
-// Registrar elementos
+// Registrar Elementos
 
-function Registrar_elemento(){
+function Registrar_Elemento(){
 
-var num_serial = document.getElementById('num_serial').value;
-var caracteristicas = document.getElementById('caracteristicas').value;
-var marca = document.getElementById('marca').value;
-var modelo = document.getElementById('modelo').value;
-
+var tip_elemento = document.getElementById('tipo_elemento').value;
+var num_serial = document.getElementById('numero_serial').value;
+var caract = document.getElementById('caracteristicas').value;
+var mar = document.getElementById('marca').value;
+var mod = document.getElementById('modelo').value;
 
 const datos = new URLSearchParams();
 
-datos.append('num_serial', num_serial);
-datos.append('caracteristicas', caracteristicas);
-datos.append('marca', marca);
-datos.append('modelo', modelo);
+datos.append('tipo_elemento', tip_elemento);
+datos.append('numero_serial', num_serial);
+datos.append('caracteristicas', caract);
+datos.append('marca', mar);
+datos.append('modelo', mod);
 
 
-fetch('registro/Registrar_elemento',{
-  method: 'POST',
-  body:datos
-})
-.then(resp=>resp.text())
-.then(data=>{
-    document.getElementById('smg');
-})
+    fetch('/registro/register_element',{
+    method: 'post',
+    body:datos
+    })
+    .then(resp=>resp.text())
+    .then(data=>{
+        
+        document.getElementById('smg').innerHTML=`<div class="alert alert-success" role="alert">E registro correctamente<strong>`;
+        
+    })
 
 }
+
+
+
+// listar Elementos
+function Elements_id(){
+  
+  fetch('/registro/Listar_elementos', {
+    method: 'get'
+  })
+  .then(resp=>resp.json())
+  .then(data=>{
+    var html = '';
+
+    for(var i in data){
+    html+=`<tr>
+                <td>${data[i].id_elemento}</td>
+                <td>${data[i].tipo_elemento}</td>
+                <td>${data[i].num_serial}</td>
+                <td>${data[i].caracteristicas}</td>
+                <td>${data[i].marca}</td>
+                <td>${data[i].modelo}</td>
+                <td class="text-center">
+                    <a href="javascript:Seleccionar_persona(${data[i].id_elemento});" title="Seleccionar" class="text-decoration-none">
+                        <i class="fas fa-check-double me-2 fa-lg"></i>
+                    </a>
+
+                    <a href="javascript:Editar_elemento(${data[i].id_elemento});" title="Editar" class="text-decoration-none">
+                        <i class="fas fa-edit me-2 fa-sm" style="color: blanchedalmond;"></i>
+                    </a>
+
+                    <a href="javascript:Eliminar_elemento(${data[i].id_elemento});" title="Eliminar" class="text-decoration-none">
+                        <i class="fas fa-trash-alt fa-sm" style="color: blanchedalmond;"></i>
+                    </a>
+                </td>
+            `
+        }
+
+        document.getElementById('Elements').innerHTML=html;
+    })
+}
+
+function Eliminar_elemento(id_elemento){
+  
+  const datos = new URLSearchParams();
+
+  datos.append('id_elemento', id_elemento);
+  
+  fetch('/registro/Eliminar_elemento',{
+    method: 'DELETE',
+    body:datos
+  })
+  .then(resp=>resp.text())
+  .then(data=>{
+      alert(data)
+        Elements_id();
+        document.getElementById('smg').innerHTML=`<div class="alert alert-danger" role="alert">${data}</div>`;
+  })
+
+}
+
+// ingresos
+
+//HORA
+reloj()
+function reloj() {
+
+    var hoy=new Date(); 
+    var h=hoy.getHours(); 
+    var m=hoy.getMinutes(); 
+    var s=hoy.getSeconds();
+
+    m = actualizarHora(m);
+    s = actualizarHora(s);
+
+    document.getElementById('HoraActual').value = h+":"+m+":"+s;
+
+
+}
+function actualizarHora(i) {
+
+    if (i<10) {i = "0" + i};  // Añadir el cero en números menores de 10
+    return i;
+}
+
+
+// FECHA
+window.onload = function(){
+  var fecha = new Date(); //Fecha actual
+  var mes = fecha.getMonth()+1; //obteniendo mes
+  var dia = fecha.getDate(); //obteniendo dia
+  var ano = fecha.getFullYear(); //obteniendo año
+  if(dia<10)
+    dia='0'+dia; //agrega cero si el menor de 10
+  if(mes<10)
+    mes='0'+mes //agrega cero si el menor de 10
+  document.getElementById('fechaActual').value=ano+"-"+mes+"-"+dia;
+}
+
+
 
 </script>

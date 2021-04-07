@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #navbar{
     background-color: #02757C;
 }
@@ -17,3 +18,48 @@ li:hover {
 #logo{
     max-width: 50%;
 }
+=======
+
+body{
+    font-family: 'Noto Sans JP', sans-serif;
+    background-image: url('/img/fondo_signin.jpeg');
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+#logo{
+    width: 35%;
+}
+
+.card{
+    margin-top: 25%;
+    border-radius: 10px;
+
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+.card-body a{
+    float: right;
+    letter-spacing: .6px;
+    text-decoration: none;
+}
+
+
+#titulo_sistema h2, h2{
+    line-height: 15px;
+}
+
+#card_signin h3{
+    font-weight: 700;
+    font-size: 20px;
+    color: #FF5800;
+    text-shadow: 1px 1px 6px #02757C;
+}
+
+#card_signin h2{
+    font-weight: 900;
+    font-size: 30px;
+    color: #FF5800;
+    text-shadow: 1px 1px 6px #02757C;
+}
+>>>>>>> 1a92e51d08bcd6094ff9949e171405c356eb4ebb
