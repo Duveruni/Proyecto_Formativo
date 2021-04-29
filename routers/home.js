@@ -4,7 +4,8 @@ const conexion = require('../conexion_BBDD.js');
 
 
 Ruta_home.get('/', (req, res) => {
-    res.render('home');
+    var user_id = req.session.id_usuario;
+    res.render('home', {usuario: user_id});
 });
 
 

@@ -6,7 +6,7 @@ function validar(req, res, next){
     if(req.session.id_usuario){
         next();
     }else{
-        res.redirect('/users/signin');
+        res.redirect('/');
     }
 }
 
@@ -48,9 +48,13 @@ Ruta_users.post('/signin', (req, res) => {
         
         if(!err){
             req.session.id_usuario=rows;
-            console.log(rows);
+            var user_id = req.session.id_usuario;
+            console.log(req.session.id_usuario)
             if(req.session.id_usuario.length>0) {
-                res.redirect('/registro/registros')
+                res.render('registrar_ingresos', {usuario: user_id})
+                
+            }else{
+                res.redirect('/');
             }
             
         }else{
@@ -59,10 +63,40 @@ Ruta_users.post('/signin', (req, res) => {
     });
 })
 
-Ruta_users.get('/logout', (req, res) => {
+Ruta_users.get('/logout', validar, (req, res) => {
     req.session.destroy();
-    res.redirect('/users/signin');
+    res.redirect('/');
 })
+
+// PERFIL
+Ruta_users.get('/perfil', (req, res) => {
+    var user_id = req.session.id_usuario;
+    res.render('perfil', {usuario: user_id});
+})
+
+// editar perfil
+Ruta_users.post('/editar_usuario', (req, res)=>{
+
+    var id = req.body.id_usuario;
+    
+    var sql = `select identificacion, nombres, apellidos, nombre_Usuario from usuarios where id_usuario = ${id}`;
+    console.log(sql)
+    conexion.query(sql,(err,rows,fields) => {
+        if(!err){
+            res.json(rows);
+        }else{
+            console.log('Error al ejecutar el sql en la BD' + err);
+        }
+    });
+});
+
+
+
+Ruta_users.get('/ayuda', (req, res) => {
+    var user_id = req.session.id_usuario;
+    res.render('help', {usuario: user_id});
+})
+
 
 
 module.exports = Ruta_users;

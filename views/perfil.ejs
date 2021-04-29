@@ -1,0 +1,79 @@
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- ICONS BOOTSTRAP -->
+    <script src="/js/home/icons/2c84f2b2f3.js"></script>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/js/home/bootstrap.min.css">
+
+    <!-- FONTS GOOGLE -->
+   
+    <link rel="stylesheet" href="/js/dataTableIngresos/GOOGLE_FONTS_CSScss2.css">
+
+    <title>Perfil</title>
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/perfil.css">
+
+  </head>
+  <body>
+    <%- include('navbar') %>
+    <div class="container">
+      <div class="card mx-auto mt-3 me-4" style="width: 25rem;">
+        <div class="card-header">
+          <h2>Perfil</h2>
+        </div>
+        
+        
+        <div class="card-body mx-auto">
+          <!-- <div class="col-md-12 me-1">
+            <a href="" class="float-end m-2" onclick="Editar_perfil(id_usuario);"><i class="fas fa-edit fa-lg"></i></a>
+          </div> -->
+          
+          <div class="col-md-10 mx-auto">
+            <img src="/img/user.png" alt="logo" class="rounded-circle mx-auto d-block m-4 mx-auto" id="logo" width="35%">
+          
+            <input type="hidden" placeholder="id" id="id_usuario" value="id_usuario">
+
+            <h6 class=" mb-2 text-muted">identificacion:</h6>
+            <input type="number" name="identificacion" id="identificacion" style="border: none; text-align: center;" value="<%- usuario[0].identificacion %>"><hr style="margin-top: 0;">
+
+            <h6 class="card-subtitle mb-2 text-muted">Nombres:</h6>
+            <input type="text" name="nombres" id="nombres" style="border: none; text-align: center;" value="<%- usuario[0].nombres %>"><hr style="margin-top: 0;">
+
+            <h6 class="card-subtitle mb-2 text-muted" id="apellidos">Apellidos:</h6>
+            <input type="text" name="apellidos" id="apellidos" style="border: none; text-align: center;" value="<%- usuario[0].apellidos %>"><hr style="margin-top: 0;">
+
+            <h6 class="card-subtitle mb-2 text-muted">Nombre usuario</h6>
+            <input type="text" name="nombre_Usuario" id="username" style="border: none; text-align: center;" value="<%- usuario[0].nombre_Usuario %>"><hr style="margin-top: 0;">
+          </div>
+        </div>
+      </div>
+    </div>
+   
+  </body>
+
+  <!-- Editar perfil -->
+  <!-- <script>
+
+    function Editar_perfil() {
+
+      const datos = new URLSearchParams();
+      datos.append('id_usuario', id_usuario);
+
+
+      fetch('/users/editar_usuario', {
+        method: 'post',
+        body: datos
+      })
+      .then(resp=>resp.json())
+      .then(data=>{
+        console.log(data)
+
+        })
+    }
+
+
+  </script> -->

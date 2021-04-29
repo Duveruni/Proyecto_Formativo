@@ -1,0 +1,21 @@
+body{
+    font-family: 'Noto Sans JP', sans-serif;
+    background-image: url('/img/fondo_perfil.jpg');
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+.card{
+    float: right;
+    border: 1px solid #127B76;
+}
+
+.card-header{
+    background-color: #127B76 !important;
+    color: #FFFFFF;
+    font-weight: 500;  
+}
+
+.card-body{
+    text-align: center;
+}

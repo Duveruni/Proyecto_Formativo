@@ -1,0 +1,436 @@
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- ICONS BOOTSTRAP -->
+    <script src="/js/icons/icons_navbar/2c84f2b2f3.js"></script>
+
+
+    <!-- LINK DATATABLE -->
+
+    <!-- export css -->
+    <link rel="stylesheet" href="/js/dataTableIngresos/bootstrap.min_StyleCSSPrimero.css">
+    <link rel="stylesheet" href="/js/dataTableIngresos/dataTables.bootstrap5.min_StyleCSSSegundo.css">
+    
+
+    <!-- export DataTable -->
+    <script src="/js/dataTableIngresos/jquery-3.5.1_primera.js"></script>
+    <script src="/js/dataTableIngresos/jquery.dataTables.min_segunda.js"></script>
+    <script src="/js/dataTableIngresos/dataTables.bootstrap5.min_tercera.js"></script>
+
+    <title>Registrar ingreso</title>
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/registro_ingresos.css">
+
+  </head>
+  <body>
+    <%- include('navbar') %>
+    <div class="container">
+        <div class="car mt-3">
+          <div class="card-header">
+            <nav class="navbar">
+              <div class="container-fluid">
+                <h3>Elementos Ingresados</h3>
+                <form class="d-flex m-0">
+                  
+
+                  <!-- vventana modal -->
+                  <!-- Button trigger modal -->
+                  <button type="button" class="btn border rounded" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    Nuevo ingreso
+                  </button>
+
+                  <!-- Modal -->
+                  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-xl">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h4 class="modal-title" id="staticBackdropLabel">Nuevo Ingreso</h4>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <div class="col-md-4">
+                            <label>Numero de documento</label>
+                          <div class="input-group mt-2  col-md-5">
+                            <input type="text" class="form-control" placeholder="Numero documento" id="identificacion_p"><a href="#" class="input-group-text text-decoration-none" id="basic-addon1" onclick="Buscar_documento();"><i class="fas fa-search"></i></a>
+                          </div>
+                          
+                          </div>
+                          <div class="mt-2" id="smg_alert"></div>
+                          <!-- Elementos ingresados -->
+                          <div class="row">
+                            <div class="col-md-12 mx-auto" id="datos_elemento">
+
+                              <form action="/registrar_ingreso/guardar_ingreso" method="POST" class="col-md-10">
+                                <h5>Elementos ingresados</h5>
+                                <table class="table table-sm table-striped table-hover">
+                                  <thead class="table-ligt">
+                                    <tr>
+                                      <th scope="col">Ingresar</th>
+                                      <th scope="col">Tipo elemento</th>
+                                      <th scope="col">Numero serial</th>
+                                      <th scope="col">Caracteristicas</th>
+                                      <th scope="col">Marca</th>
+                                      <th scope="col">Modelo</th>
+                                      
+                                    </tr>
+                                  </thead>
+                                  <tbody  id="elementos_ingresados">
+                                                         
+                                  </tbody>
+                              </table>
+
+                                <!-- Hora, fecha y ingreso_salida -->
+                                <div class="row">
+                                  <div class="col col-md-2">
+                                    <label class="fw-bold">Hora</label>
+                                    <input type="time" id="HoraActual" class="form-control form-control-sm" name="hora" placeholder="Hora" disabled>
+                                  </div>
+                                  <div class="col col-md-2">
+                                      <label class="fw-bold">Fecha</label>
+                                      <input type="date" id="fechaActual" class="form-control form-control-sm" name="fecha" placeholder="Año/Mes/Dia" disabled>
+                                  </div>
+                                </div>
+                                </div>
+                              </form>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </nav>
+            
+            
+            
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col">
+                <div class="col-md-12 text-center">
+                 
+                  <table class="table table-striped table-hover table-bordered">
+                      <thead class="table table-Success text-center">
+                        <tr>
+                          <th scope="col">ID</th>
+                          <th scope="col">Hora entrada</th>
+                          <th scope="col">Fecha entrada</th>
+                          <th scope="col">Numero documento</th>
+                          <th scope="col">Nombres</th>
+                          <th scope="col">Tipo elemento</th>
+                          <th scope="col">Numero serial</th>
+                          <th scope="col">Caracteristicas</th>
+                          <th scope="col">Retirar</th>
+                        </tr>
+                      </thead>
+                      <tbody id="tabla_html">
+                        
+                      </tbody>
+                  </table>
+              </div>
+              </div>
+              
+            </div>
+          </div>
+          
+        </div>
+        </div>
+        
+    </div>
+   
+  </body>
+
+  <script>
+
+    
+function actualizar(){
+    location.reload(true);
+}
+
+// listar elementos tanla normal
+Listar_ingresos()
+function Listar_ingresos(){
+  
+  fetch('/registrar_ingreso/Listar_elementos', {
+    method: 'get'
+  })
+  .then(resp=>resp.json())
+  .then(data=>{
+    var html = '';
+
+    for(var i in data){
+    html+=`<tr>
+                <td>${data[i].id_ingreso}</td>
+                <td>${data[i].hora_entrada}</td>
+                <td>${data[i].fecha_entrada}</td>
+                <td>${data[i].identificacion}</td>
+                <td>${data[i].nombres}</td>
+                <td>${data[i].tipo_elemento}</td>
+                <td>${data[i].num_serial}</td>
+                <td>${data[i].caracteristicas}</td>
+                <td>  <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal"    waves-effect" id="vent_modal" onclick="Buscar_registro(${data[i].id_ingreso})">
+                      Retirar
+                  </button>                  
+                  </td>
+          </tr>`
+    }
+    document.getElementById('tabla_html').innerHTML=html;
+    
+  })
+  
+}
+
+
+function Buscar_registro(id_ingreso){
+
+const datos = new URLSearchParams();
+datos.append('id_ingreso', id_ingreso);
+
+
+fetch('/registrar_ingreso/Buscar_registro', {
+  method: 'post',
+  body: datos
+})
+.then(resp=>resp.json())
+.then(data=>{
+
+  console.log(data);
+
+  var html = '';
+  html+=`<!-- Button trigger modal -->
+<button class="btn btn-success btn-sm p-0">
+  Retirar
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" style="color:white;" id="exampleModalLabel">Retirar elemento</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="registrar_personas/Guardar_salida" method="put" >
+          <div class="form-group mb-3">
+                <input type="number" class="form-control" name="id" id="id_ingreso" placeholder="id" style="visibility: hidden">
+              </div>
+          <div class="row mt-0">
+            <h4>Datos del ingreso</h4>
+            <div class="col">
+              <div class="form-group mb-3">
+                <label class="fw-bold">Hora de entrada</label>
+                <input type="time" class="form-control" name="hora" id="hora_entrada" placeholder="Hora" disabled>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="form-group mb-3">
+                <label class="fw-bold">Fecha de entrada</label>
+                <input type="date" class="form-control" name="fecha" id="fecha_entrada" placeholder="Fecha" disabled>
+              </div>
+            </div>
+          </div>
+          <div class="form-group mb-3">
+              <input type="text" class="form-control" name="estado" id="estado" placeholder="Estado" disabled>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="form-group mb-3">
+                <label class="fw-bold">Persona responsable</label>
+                <input type="text" class="form-control" name="fk_persona" id="fk_persona" placeholder="fk_persona" disabled>
+              </div>  
+            </div>
+
+            <div class="col">
+              <div class="form-group mb-3">
+                <label class="fw-bold">ID Elemento</label>
+                <input type="text" class="form-control" name="fk_elemento" id="fk_elemento" placeholder="fk_elemento" disabled>
+              </div>
+            </div>
+          </div>
+          
+          <a href="/registrar_ingreso"><button type="button" class="btn btn-outline-success mb-2" id="boton_registrar" style="float-right" onclick="Retirar_elemento();">Retirar</button></a>
+        </form>
+        
+    </div>
+  </div>
+</div>`
+    document.getElementById('vent_modal').innerHTML=html;
+    for(var i in data){
+    
+
+    document.getElementById('id_ingreso').value= data[i].id_ingreso;
+    document.getElementById('hora_entrada').value= data[i].hora_entrada;
+    document.getElementById('fecha_entrada').value= data[i].fecha_entrada;
+    document.getElementById('estado').value= data[i].estado;
+    document.getElementById('fk_persona').value= data[i].fk_persona;
+    document.getElementById('fk_elemento').value= data[i].fk_elemento;
+
+    }
+
+    
+  })
+}
+
+
+    function Buscar_documento(){
+
+      var num_documento = document.getElementById('identificacion_p').value;
+
+      const datos = new URLSearchParams();
+      datos.append('identificacion_p', num_documento);
+
+      fetch('/registrar_ingreso/buscar_documento',{
+      method: 'post',
+      body: datos
+      })
+      .then(resp=>resp.json())
+      .then(data=>{
+        console.log(data)
+        var html = '';
+
+          for(var i in data){
+          html+=`<tr>
+                        <td>
+
+                          <div class="form-check" ><a class="btn btn-success" href="javascript:registrar(${data[i].fk_persona}, ${data[i].id_elemento});" id="confirm">Ingresar</a>
+                          
+                            <label class="form-check-label" for="flexCheckIndeterminate" id="elemento_id">
+                              <td>${data[i].tipo_elemento}</td>
+                              <td>${data[i].num_serial}</td>
+                              <td>${data[i].caracteristicas}</td>
+                              <td>${data[i].marca}</td>
+                              <td>${data[i].modelo}</td>
+                            </label>
+                          </div>
+                        </td>
+                      </tr>       
+                  `
+
+                    document.getElementById('elementos_ingresados').innerHTML=html;
+
+        document.getElementById('smg_alert').innerHTML=`<div class="alert alert-warning alert-dismissible fade show" role="alert">Se entontraron los sguientes elementos registrados con el documento <strong>${num_documento}.</strong><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>`;
+       }
+      })
+      
+
+}
+
+  // Horas y fecha
+
+    //HORA
+reloj()
+function reloj() {
+
+    var hoy=new Date(); 
+    var h=hoy.getHours(); 
+    var m=hoy.getMinutes(); 
+    var s=hoy.getSeconds();
+
+    m = actualizarHora(m);
+    s = actualizarHora(s);
+
+    document.getElementById('HoraActual').value = h+":"+m+":"+s;
+
+
+}
+function actualizarHora(i) {
+
+    if (i<10) {i = "0" + i};  // Añadir el cero en números menores de 10
+    return i;
+}
+
+// FECHA
+window.onload = function(){
+  var fecha = new Date(); //Fecha actual
+  var mes = fecha.getMonth()+1; //obteniendo mes
+  var dia = fecha.getDate(); //obteniendo dia
+  var ano = fecha.getFullYear(); //obteniendo año
+  if(dia<10)
+    dia='0'+dia; //agrega cero si el menor de 10
+  if(mes<10)
+    mes='0'+mes //agrega cero si el menor de 10
+  document.getElementById('fechaActual').value=ano+"-"+mes+"-"+dia;
+}
+
+
+
+// registrar Ingreso
+
+function registrar(fk_persona, id_elemento){
+
+  var estado = "ingreso";
+  var hora = document.getElementById('HoraActual').value;
+  var fecha = document.getElementById('fechaActual').value;
+
+  const datos = new URLSearchParams();
+
+    datos.append('HoraActual', hora);
+    datos.append('fechaActual', fecha);
+    datos.append('estado', estado);
+    datos.append('fk_persona', fk_persona);
+    datos.append('fk_elemento', id_elemento);
+
+fetch('/registrar_ingreso/guardar_ingreso',{
+  method: 'post',
+  body:datos
+})
+.then(resp=>resp.text())
+.then(data=>{
+  alert('Se ingreso el elemento correctamente...')
+  actualizar()
+})
+
+}
+
+// confirmSelect()
+function confirmation() 
+     {
+        if(confirm("Desea seguir?"))
+	{
+	   return true;
+	}
+	else
+	{
+	   return false;
+	}
+     }
+
+
+// retirar el elemento
+function Retirar_elemento(){
+
+
+  var id = document.getElementById('id_ingreso').value;
+
+  var estado2 = "salio";
+  var hora_salida = document.getElementById('HoraActual').value;
+  var fecha_salida = document.getElementById('fechaActual').value;
+
+  const datos = new URLSearchParams();
+
+
+  datos.append('id_ingreso', id);
+  datos.append('estado', estado2);
+  datos.append('HoraActual', hora_salida);
+  datos.append('fechaActual', fecha_salida);
+
+
+  fetch('/registrar_ingreso/Guardar_salida', {
+  method: 'put',
+  body: datos
+  })
+  .then(resp=>resp.json())
+  .then(data=>{
+    alert(data)
+    actualizar()
+   
+    })
+}
+
+  </script>

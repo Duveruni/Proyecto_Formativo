@@ -1,0 +1,31 @@
+body{
+    font-family: 'Noto Sans JP', sans-serif;
+    background-image: url('/img/help3.jpg');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    height: 100%;
+    background-color: rgb(63, 79, 109);
+}
+
+#ayuda{
+    background-color: #FFFFFF;
+}
+
+#ayuda h4{
+    color: #127B76;
+    font-weight: 800;
+    letter-spacing: 3px;
+}
+
+#ayuda p{
+    color: #127B76;
+    letter-spacing: 3px;
+    font-weight: 600;
+}
+
+.accordion .accordion-button{
+    background-color: #127B76;
+    color: #FFFFFF;
+    font-weight: 500;
+    border: 1px solid #FFFFFF;
+}

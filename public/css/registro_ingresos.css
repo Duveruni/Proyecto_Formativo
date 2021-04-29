@@ -1,0 +1,64 @@
+
+*{
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+.card{
+    border: 1px solid #127B76 !important;
+}
+
+.navbar{
+    background-color: #127B76 !important;
+}
+
+.card-header{
+    background-color: #127B76 !important;
+    color: #FFFFFF;
+    border-radius: 5px !important;
+}
+
+.container-fluid form button {
+    color: #FFFFFF;
+    border-radius: 7px;
+    font-weight: 700;
+}
+
+.container-fluid form button:hover{
+    color: #127B76;
+    background-color: powderblue;
+    transition: background-color .5s;
+}
+
+
+/* MODAL NUEVO INGRESO */
+
+.modal-header {
+    background-color: #127B76;
+}
+
+.modal-header h4{
+    color: #ffffff;
+    font-weight: 700;
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+.modal-body label{
+    color: #127B76;
+    font-weight: 700;
+}
+
+#datos_elemento{
+    color: #127B76;
+    font-weight: 700;
+}
+
+
+
+.table-hover:hover{
+    background-color: rgb(238, 238, 238);
+}
+
+
+#boton_registrar{
+    float: right;
+}

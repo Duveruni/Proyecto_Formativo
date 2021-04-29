@@ -1,0 +1,188 @@
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- ICONS BOOTSTRAP -->
+    <script src="/js/home/icons/2c84f2b2f3.js"></script>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/js/home/bootstrap.min.css">
+
+
+    <title>Registrar Elemento</title>
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/register_elements.css">
+
+  </head>
+  <body>
+    <%- include('navbar') %>
+    <div class="container">
+        
+        <div class="card mt-3" style="width: 35rem;">
+            <div class="card-header">
+                <h4>Registrar Elemento</h4>
+            </div>
+            <div class="card-body">
+                <div class="col-md-11 mx-auto">
+                    <div class="col-md-5 float-end">
+                        <label>Editar datos de:</label>
+                        <div class="input-group input-group-sm mb-3">
+                            <input type="text" class="form-control" placeholder="Numero serial" id="serial" name="identificacion"><a href="#" class="input-group-text text-decoration-none" id="basic-addon1" onclick="Editar_elemento();">Buscar</a>
+                        </div>
+                    </div>
+                    <br>
+                    <hr>
+                </div>
+                <form action="registro/register_people" method="POST" class="col-md-11 mx-auto">
+                    
+                    <!-- <h5 class="data_title">Datos personales</h5> -->
+                    <div class="form-group mb-3">
+                        <input type="text" class="form-control" name="elemento" id="tipo_elemento" placeholder="Tipo de Elemento" >
+                    </div>
+                    <div class="form-group mb-3">
+                        <input type="text" class="form-control" name="num_serial" id="numero_serial" placeholder="Numero Serial" >
+                    </div>
+                    <div class="form-floating mb-3">
+                        <label class="form-label mb-3 p-1" style="color: rgb(141, 141, 141);">Caracteristicas...</label>
+                        <textarea class="form-control mb-3" placeholder="Caracteristicas" id="caracteristicas" style="height: 60px; font-weight:500;"></textarea>
+                        
+                    </div>
+                    <div class="form-group mb-3">
+                        <input type="text" class="form-control" name="marca" id="marca" placeholder="Marca" >
+                    </div>
+                    <div class="form-group mb-3">
+                        <input type="text" class="form-control" name="modelo" id="modelo" placeholder="Modelo" >
+                    </div>
+                    <div class="form-group mb-3">
+                        <input type="text" class="form-control" name="elemento" id="responsable" placeholder="Numero de documento del responsable" >
+                    </div>
+                    <div id="actualizar"></div>
+                    <button type="button" class="btn border-end border-start" id="registrar_pers" onclick="Registrar_Elemento();" id="btnGuardarPersona">Registrar</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+   
+  </body>
+
+
+
+<script>
+
+function actualizar(){
+    location.reload(true);
+}
+
+// Registrar Elementos
+
+function Registrar_Elemento(){
+
+var tip_elemento = document.getElementById('tipo_elemento').value;
+var num_serial = document.getElementById('numero_serial').value;
+var caract = document.getElementById('caracteristicas').value;
+var mar = document.getElementById('marca').value;
+var mod = document.getElementById('modelo').value;
+var resp = document.getElementById('responsable').value;
+
+const datos = new URLSearchParams();
+
+datos.append('tipo_elemento', tip_elemento);
+datos.append('numero_serial', num_serial);
+datos.append('caracteristicas', caract);
+datos.append('marca', mar);
+datos.append('modelo', mod);
+datos.append('responsable', resp);
+
+
+    fetch('/registrar_personas/registrar_elemento',{
+    method: 'post',
+    body:datos
+    })
+    .then(resp=>resp.text())
+    .then(data=>{
+        
+        alert(data)
+        actualizar()
+        
+    })
+   
+
+}
+
+
+
+// Editar persona
+
+function Editar_elemento(){
+
+var numero_serial = document.getElementById('serial').value;
+
+const datos = new URLSearchParams();
+datos.append('serial', numero_serial);
+
+
+fetch('/registrar_personas/Buscar_elemento', {
+method: 'post',
+body: datos
+})
+.then(resp=>resp.json())
+.then(data=>{
+
+    var html = '';
+    console.log(data)
+    for(var i in data){
+    
+
+    document.getElementById('tipo_elemento').value= data[i].tipo_elemento;
+    document.getElementById('numero_serial').value= data[i].num_serial;
+    document.getElementById('caracteristicas').value= data[i].caracteristicas;
+    document.getElementById('marca').value= data[i].marca;
+    document.getElementById('modelo').value= data[i].modelo;
+    document.getElementById('responsable').value= data[i].fk_persona;
+
+    
+    
+    }
+
+    html+=`<button type="button" class="btn btn-outline-success mb-2" onclick="Actualizar_elemento();">Actualizar</button>`
+    document.getElementById('actualizar').innerHTML=html;
+    
+})
+}
+
+
+// actualizar elementos
+function Actualizar_elemento(){
+
+var tipo_elemento = document.getElementById('tipo_elemento').value;
+var num_serial = document.getElementById('numero_serial').value;
+var caract = document.getElementById('caracteristicas').value;
+var marca = document.getElementById('marca').value;
+var modelo = document.getElementById('modelo').value;
+var resp = document.getElementById('responsable').value;
+
+const datos = new URLSearchParams();
+
+datos.append('tipo_elemento', tipo_elemento);
+datos.append('numero_serial', num_serial);
+datos.append('caracteristicas', caract);
+datos.append('marca', marca);
+datos.append('modelo', modelo);
+datos.append('responsable', resp);
+
+fetch('/registrar_personas/Actualizar_elemento',{
+  method: 'put',
+  body: datos
+})
+.then(resp=>resp.text())
+.then(data=>{
+    alert(data)
+    actualizar()
+
+})
+}
+
+
+  </script>

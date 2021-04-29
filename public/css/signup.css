@@ -7,11 +7,49 @@ body{
 
 .card{
     margin-top: 25%;
-    border-radius: 10px;
+    border-radius: 5px;
+    border: 1px solid #127B76;
 }
+
+.card-header{
+    background-color: #127B76;
+    border-radius: 5px;
+    color: #FFFCFB;
+    font-weight: 800;
+}
+
+.card-header h4{
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 4px #000000;
+}
+
+
 
 .card-body a{
     float: right;
     letter-spacing: 1px;
     text-decoration: none;
+}
+
+#btn_ingresar{
+    background-color: #127B76;
+    color: #FFFCFB;
+    border-radius: 5px;
+    letter-spacing: 1px;
+    font-weight: 700;
+}
+
+#btn_ingresar:hover{
+    color: #127B76;
+    background-color: powderblue;
+    transition: background-color .5s;
+}
+
+#con_cuenta{
+    color: #127B76;
+    font-weight: 700;
+}
+#con_cuenta:hover{
+    border-bottom: 2px solid powderblue;
 }

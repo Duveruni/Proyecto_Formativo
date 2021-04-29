@@ -1,127 +1,34 @@
-/* NAVEGACION */
-#nav_header{
-    background-color: #FF5800;
-    height: 50px !important;
+body{
+    font-family: 'Noto Sans JP', sans-serif;
+    background-image: url('/img/sena.jpg');
+    background-repeat: no-repeat;
+    background-size: 100%;
 }
 
-#caja_img{
-    float: right;
-    width: 100px;
-    height: 50px;
-    background-color: #02767ce8;
-}
-
-
-#nav_header img{
-    width: 100%;
-    height: 100%;
-}
-
-h1{
-    text-align: center;
-    font-family: 'Roboto', sans-serif;
-    top: 10px;
+*{
+    font-family: 'Noto Sans JP', sans-serif;
 }
 .card{
-    border-radius: 7px !important;
-    border: 1px solid #EE7912;
-    background-color: #ee791204 !important;
-    min-height: 500px;
+    float: right;
+    border: 1px solid #127B76 !important;
 }
+
 .card-header{
-    background-color: #FF5800;
-    border-radius: 7px !important;
-    text-align: center;
-}
-
-h4{
-    color: #FFF9FB;
-    font-weight: 700;
-}
-
-#img_elements{
-    width: 50px;
-}
-.form-group img{
-    width: 50px;
-}
-
-#btn_register{
-    margin-top: 0 !important;
-    margin-bottom: 10px;
-}
-
-#floatingTextarea2{
-    min-height: 130px;
-    color: black;
-}
-#label_text{
-    color: rgb(126, 126, 126);
-    font-weight: 500;
-    font-size: 15px;
-    letter-spacing: 1px;
-}
-
-.input-group a{
-    text-decoration: none;
-}
-
-/* INICIAR SESION */
-
-#logo {
-    width: 30%;
-}
-
-/* VENTANA MODAL DE REGISTRO */
-
-.modal{
-    border-radius: 20px;
-}
-
-#ventana_modal{
-    color: black;
-}
-
-.modal-header{
-    background-color: #FF5800;
+    background-color: #127B76 !important;
+    color: #FFFFFF;
     
 }
 
-.modal-header #exampleModalLabel{
-    font-size: 25px;
-    color: white;
+#registrar_pers{
+    background-color: #127B76;
+    color: #FFFCFB;
+    border-radius: 5px;
+    letter-spacing: 1px;
     font-weight: 700;
-    letter-spacing: 2px;
-    margin: 0 auto;
 }
 
-#body_modal{
-    border-radius: 7px !important;
-    border: 1px solid #EE7912;
+#registrar_pers:hover{
+    color: #127B76;
+    background-color: powderblue;
+    transition: background-color .5s;
 }
-
-.modal-footer{
-    background-color: #02767c2f;
-}
-
-/* DATOS DEL ELEMENTO */
-
-.data_title{
-    color: rgb(128, 128, 128);
-    font-weight: 800;
-    font-size: 25px;
-    letter-spacing: 2px;
-    margin: 18px auto;
-}
-
-
-/* SIGNIN */
-#card_signin{
-    height: 200px !important;
-    border: none;
-}
-
-
-/* #validar{
-    visibility: hidden;
-} */

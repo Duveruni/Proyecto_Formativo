@@ -1,13 +1,63 @@
+
+#navbar #nomb_software{
+    color: #FFFFFF;
+    font-weight: 800;
+    border-radius: 5px;
+}
+
 #navbar{
-    background-color: #02757C;
+    background-color: #127B76;
 }
 
 #navbarText ul li a{
-    color: #FF5800;
+    font-weight: 500;
+    color: #FFFFFF;
     height: 100%;
     font-family: 'Noto Sans JP', sans-serif;
+    border-radius: 5px;
 }
 
-li a:hover{
-    background-color: rgb(255, 219, 219);
+#navbarText ul li a:hover{
+    color: #127B76;
+    background-color: powderblue;
+    transition: background-color .5s;
+}
+
+#items_nav .dropdown-menu{
+    background-color: #127B76;
+    border-radius: 2px;
+}
+
+.dropdown-menu li {
+    border-radius: 1px;
+}
+
+
+/* user */
+
+#user a{
+    font-weight: 400;
+    color: #FFFFFF;
+    height: 100%;
+    font-family: 'Noto Sans JP', sans-serif;
+    border-radius: 5px;
+}
+
+
+#user a:hover{
+    color: #127B76;
+    background-color: powderblue;
+    transition: background-color .5s;
+}
+
+#user .dropdown-menu{
+    background-color: #127B76;
+}
+
+#user .dropdown-menu li a{
+    font-weight: 400;
+}
+
+#user ul li a {
+    border-radius: 1px !important;
 }

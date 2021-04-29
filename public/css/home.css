@@ -1,15 +1,40 @@
 body{
-    background-color: rgb(202, 202, 202);
+    font-family: 'Noto Sans JP', sans-serif;
+    background-image: url('/img/fondo_home.jpg');
+    background-repeat: no-repeat;
+    background-size: 100%;
 }
 
-#carouselExampleCaptions{
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+.card{
+    float: right;
+    background-color: #ffffff23;
+    border: none;
 }
 
-/* #items_nav{
-    visibility: hidden;
+.card-body{
+    color: #127B76;
+    letter-spacing: 1px;
+    font-weight: 700;
+    /* line-height: 10px; */
 }
 
-#cerrar_sesion{
-    visibility: hidden;
-} */
+.card-body h1{
+    color: #127B76;
+    letter-spacing: 8px;
+    line-height: 50px;
+    font-weight: 900;
+    text-shadow: 2px 2px 2px #000000;
+    font-size: 60px;
+    /* text-decoration: 2px underline #ffffff; */
+}
+.elements{
+    margin-left: 20%;
+}
+.card-body p{
+    margin-top: 40px;
+    font-size: 16px;
+    color: orange;
+    letter-spacing: 3px;
+    font-weight: 900;
+    text-shadow: 2px 2px 2px #000000;
+}

@@ -1,0 +1,241 @@
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- ICONS BOOTSTRAP -->
+    <script src="/js/home/icons/2c84f2b2f3.js"></script>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/js/home/bootstrap.min.css">
+
+
+    <title>Registrar Persona</title>
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/register_elements.css">
+
+  </head>
+  <body>
+    <%- include('navbar') %>
+    <div class="container">
+        <div class="card mt-3" style="width: 35rem;">
+            <div class="card-header">
+                <h4>Registrar Persona</h4>
+            </div>
+            <div class="card-body">
+                <div class="col-md-11 mx-auto">
+                    <div class="col-md-6 float-end">
+                        <label>Editar Datos de:</label>
+                        <div class="input-group input-group-sm mb-3">
+                            <input type="text" class="form-control" placeholder="Numero documento" id="ident" name="identificacion"><a href="#" class="input-group-text text-decoration-none" id="basic-addon1" onclick="Editar_persona();">Buscar</a>
+                        </div>
+                    </div>
+                    <br>
+                    <hr>
+                </div>
+                
+                <form action="registro/register_people" method="POST" class="col-md-11 mx-auto">
+                    <!-- <h5 class="data_title">Datos personales</h5> -->
+                    <div class="form-group mb-3">
+                        <select class="form-select" aria-label="Default select example" id="tipo_documento">
+                            <option selected>Tipo de Documento</option>
+                            <option value="Tarjeta Identidad">Tarjeta Identidad</option>
+                            <option value="Cedula Ciudadania">Cedula Ciudadania</option>
+                            <option value="Documento Extranjero">Documento Extranjero</option>
+                        </select>
+                    </div>
+                    <div class="form-group mb-3" >
+                        <input type="number" class="form-control"  name="numero_documento" placeholder="Numero de documento" id="numero_documento">
+                    </div>
+                    <div class="form-group mb-3 mt-2">
+                        <input type="text" class="form-control" name="nombres" placeholder="Nombres" id="nombres">
+                    </div>
+                    <div class="form-group mb-3">
+                        <input type="text" class="form-control" name="apellidos" placeholder="Apellidos" id="apellidos">
+                    </div>
+                    <div class="form-group mb-3">
+                        <input type="text" class="form-control" name="telefono" placeholder="Telefono" id="telefono">
+                    </div>
+                    <div class="form-group mb-3">
+                        <select class="form-select" aria-label="Default select example" id="tipo_persona">
+                            <option selected>Tipo de persona</option>
+                            <option value="Instructor">Instructor</option>
+                            <option value="Aprendiz">Aprendiz</option>
+                            <option value="Invitado">Invitado</option>
+                        </select>
+                    </div>
+                    <div id="actualizar"></div>
+                    <button type="button" class="btn border-end border-start" id="registrar_pers" onclick="Registrar_persona();" id="btnGuardarPersona">Registrar</button>
+                </form>
+            </div>
+        </div>
+
+
+        
+    </div>
+   
+  </body>
+
+
+
+<script>
+
+
+function actualizar(){
+    location.reload(true);
+}
+
+    // Elements_id()
+    
+function consultar_numero(){
+
+    var id = document.getElementById('identificacion').value;
+
+    const datos = new URLSearchParams();
+    datos.append('identificacion', id);
+
+    fetch('/registro/consultar_documento',{
+    method: 'post',
+    body: datos
+    })
+    .then(resp=>resp.json())
+    .then(data=>{
+        console.log(data)
+        var html = '';
+
+        for(var i in data){
+            html+=`<tr>
+                        <td>${data[i].tipo_documento}</td>
+                        <td>${data[i].identificacion}</td>
+                        <td>${data[i].nombres}</td>
+                        <td>${data[i].apellidos}</td>
+                        <td>${data[i].telefono}</td>
+                        <td>${data[i].Tipo_persona}</td>
+                        <td class="text-center">
+                            <a href="javascript:Seleccionar_persona(${data[i].id_persona});" title="Seleccionar" class="text-decoration-none">
+                                <i class="fas fa-check-double me-2 fa-lg"></i>
+                            </a>
+
+                            <a href="javascript:Editar_elemento(${data[i].id_persona});" title="Editar" class="text-decoration-none">
+                                <i class="fas fa-edit me-2 fa-sm"></i>
+                            </a>
+
+                            <a href="javascript:Eliminar_elemento(${data[i].id_persona});" title="Eliminar" class="text-decoration-none">
+                                <i class="fas fa-trash-alt fa-sm"></i>
+                            </a>
+                        </td>
+                    <td>`
+        }
+        document.getElementById('datos_persona').innerHTML=html;
+    })
+    alert(data)
+
+    
+
+}
+
+    
+function Registrar_persona(){
+
+var tipo_doc = document.getElementById('tipo_documento').value;
+var numero_doc = document.getElementById('numero_documento').value;
+var nomb = document.getElementById('nombres').value;
+var apel = document.getElementById('apellidos').value;
+var tel = document.getElementById('telefono').value;
+var tipo_per = document.getElementById('tipo_persona').value;
+
+const datos = new URLSearchParams();
+
+datos.append('tipo_documento', tipo_doc);
+datos.append('numero_documento', numero_doc);
+datos.append('nombres', nomb);
+datos.append('apellidos', apel);
+datos.append('telefono', tel);
+datos.append('tipo_persona', tipo_per);
+
+    fetch('/registrar_personas/registrar_persona',{
+    method: 'post',
+    body:datos
+    })
+    .then(resp=>resp.text())
+    .then(data=>{
+
+        
+        alert(data)
+        actualizar()
+    })
+   
+}
+
+
+// Editar persona
+
+ function Editar_persona(){
+
+    var num_documento = document.getElementById('ident').value;
+
+    const datos = new URLSearchParams();
+    datos.append('ident', num_documento);
+
+
+    fetch('/registrar_personas/Buscar_persona_p', {
+    method: 'post',
+    body: datos
+    })
+    .then(resp=>resp.json())
+    .then(data=>{
+        var html2 = '';
+        var html = '';
+        console.log(data)
+        for(var i in data){
+        
+
+        document.getElementById('tipo_documento').value= data[i].tipo_documento;
+        document.getElementById('numero_documento').value= data[i].identificacion;
+        document.getElementById('nombres').value= data[i].nombres;
+        document.getElementById('apellidos').value= data[i].apellidos;
+        document.getElementById('telefono').value= data[i].telefono;
+        document.getElementById('tipo_persona').value= data[i].tipo_persona;
+
+        
+        
+        }
+
+        html+=`<button type="button" class="btn btn-outline-success mb-2" onclick="Actualizar_persona();">Actualizar</button>`
+        document.getElementById('actualizar').innerHTML=html;
+        
+    })
+}
+
+function Actualizar_persona(){
+
+var tipo_doc = document.getElementById('tipo_documento').value;
+var identificacion = document.getElementById('numero_documento').value;
+var nombres = document.getElementById('nombres').value;
+var apellidos = document.getElementById('apellidos').value;
+var telefono = document.getElementById('telefono').value;
+var tipo_persona = document.getElementById('tipo_persona').value;
+
+const datos = new URLSearchParams();
+
+datos.append('tipo_documento', tipo_doc);
+datos.append('numero_documento', identificacion);
+datos.append('nombres', nombres);
+datos.append('apellidos', apellidos);
+datos.append('telefono', telefono);
+datos.append('tipo_persona', tipo_persona);
+
+fetch('/registrar_personas/Actualizar_persona',{
+  method: 'put',
+  body: datos
+})
+.then(resp=>resp.text())
+.then(data=>{
+    alert(data)
+    actualizar()
+    // document.getElementById('smg').innerHTML=`<div class="alert alert-warning" role="alert">${data}</div>`;
+})
+
+}
+
+</script>

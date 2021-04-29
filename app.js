@@ -4,10 +4,10 @@ const session = require('express-session');
 
 //rutas de los modulos
 const Ruta_home = require('./routers/home');
-const Ruta_registro = require('./routers/registros');
+const Ruta_guardar_registro = require('./routers/registrar_ingresos');
+const Ruta_registro = require('./routers/registrar_personas_elementos');
 const Ruta_reports = require('./routers/reports');
 const Ruta_users = require('./routers/users');
-const Ruta_help = require('./routers/help');
 
 var Servidor = express();
 
@@ -18,22 +18,22 @@ Servidor.use(body_parser.json());
 Servidor.use(body_parser.urlencoded({extended:true}));
 
 Servidor.use(session({
-    secret:"_Password_Profecto_Formativo",
-    resave:false,
-    saveUninitialized:false
+    secret:"_Password_Proyecto_Formativo",
+    resave:true,
+    saveUninitialized:true
 }));
 
 Servidor.use(express.static(__dirname+'/public'));
 
 Servidor.get('/', (peticion, respuesta)=>{
-    respuesta.render('index');
+    respuesta.render('signin');
 });
 
 Servidor.use('/home', Ruta_home);
-Servidor.use('/registro', Ruta_registro);
+Servidor.use('/registrar_ingreso', Ruta_guardar_registro);
+Servidor.use('/registrar_personas', Ruta_registro);
 Servidor.use('/reportes', Ruta_reports);
 Servidor.use('/users', Ruta_users);
-Servidor.use('/help', Ruta_help);
 
 Servidor.listen(3000, ()=>{
     console.log("El servidor inicio en el puerto 3000")

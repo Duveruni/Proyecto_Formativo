@@ -1,13 +1,13 @@
--- MySQL dump 10.13  Distrib 5.7.12, for Win32 (AMD64)
+-- MySQL dump 10.13  Distrib 8.0.20, for Win64 (x86_64)
 --
--- Host: localhost    Database: database_adsi
+-- Host: localhost    Database: proyecto_adsi
 -- ------------------------------------------------------
--- Server version	5.5.5-10.1.28-MariaDB
+-- Server version	5.7.32-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -16,34 +16,32 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `elemento`
+-- Table structure for table `elementos`
 --
 
-DROP TABLE IF EXISTS `elemento`;
+DROP TABLE IF EXISTS `elementos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `elemento` (
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `elementos` (
   `id_elemento` int(11) NOT NULL AUTO_INCREMENT,
-  `num_serial` varchar(30) NOT NULL,
-  `marca` varchar(20) NOT NULL,
-  `modelo` varchar(20) NOT NULL,
-  `caracteristicas` varchar(30) NOT NULL,
-  `tipo_de_elemento` varchar(30) NOT NULL,
+  `tipo_elemento` varchar(45) NOT NULL,
+  `num_serial` varchar(45) NOT NULL,
+  `caracteristicas` varchar(45) NOT NULL,
+  `marca` varchar(45) NOT NULL,
+  `modelo` varchar(45) NOT NULL,
   `fk_persona` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_elemento`),
-  KEY `elemento_persona` (`fk_persona`),
-  CONSTRAINT `elemento_persona` FOREIGN KEY (`fk_persona`) REFERENCES `persona` (`id_persona`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`id_elemento`)
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `elemento`
+-- Dumping data for table `elementos`
 --
 
-LOCK TABLES `elemento` WRITE;
-/*!40000 ALTER TABLE `elemento` DISABLE KEYS */;
-INSERT INTO `elemento` VALUES (2,'mxl92501xm','samsung','j8prime','color rojo ','tablet',2),(3,'mxxx1500132','hewlett y packard','hp6000','forro plastico ','portatil',5),(4,'1004856','don pancho','gradn stream','esta nuevo','gps',6),(5,'jmp500','genius','qt300','color gris','parantes',7),(6,'jt000546','axion','zdfger','color negro','portatil',8),(8,'jt000546','axion','zdfger','color negro','',NULL),(11,'fasdf','asasdf','dfgsdgs','sdfro','',NULL);
-/*!40000 ALTER TABLE `elemento` ENABLE KEYS */;
+LOCK TABLES `elementos` WRITE;
+/*!40000 ALTER TABLE `elementos` DISABLE KEYS */;
+INSERT INTO `elementos` VALUES (32,'celular','4324324','celular','apple','2019',324324123),(33,'portatil','432fder','Portatil negro con gris','Acer','2019.sd',1234567890),(34,'portatil','432fdsf','Portatil negro con bordes rojos','hp','2020',1234545667);
+/*!40000 ALTER TABLE `elementos` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -52,20 +50,22 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ingreso`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ingreso` (
   `id_ingreso` int(11) NOT NULL AUTO_INCREMENT,
-  `fecha_ingreso` datetime NOT NULL,
-  `fecha_salida` datetime NOT NULL,
+  `hora_entrada` time DEFAULT NULL,
+  `fecha_entrada` date DEFAULT NULL,
+  `hora_salida` time DEFAULT NULL,
+  `fecha_salida` date DEFAULT NULL,
+  `estado` varchar(45) NOT NULL,
   `fk_persona` int(11) NOT NULL,
   `fk_elemento` int(11) NOT NULL,
-  `novedades` varchar(90) NOT NULL,
   PRIMARY KEY (`id_ingreso`),
   KEY `ingreso_persona` (`fk_persona`),
   KEY `ingreso_elemento` (`fk_elemento`),
-  CONSTRAINT `ingreso_elemento` FOREIGN KEY (`fk_elemento`) REFERENCES `elemento` (`id_elemento`),
-  CONSTRAINT `ingreso_persona` FOREIGN KEY (`fk_persona`) REFERENCES `persona` (`id_persona`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+  CONSTRAINT `ingreso_ibfk_1` FOREIGN KEY (`fk_persona`) REFERENCES `persona` (`identificacion`),
+  CONSTRAINT `ingreso_ibfk_2` FOREIGN KEY (`fk_elemento`) REFERENCES `elementos` (`id_elemento`)
+) ENGINE=InnoDB AUTO_INCREMENT=140 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -74,7 +74,7 @@ CREATE TABLE `ingreso` (
 
 LOCK TABLES `ingreso` WRITE;
 /*!40000 ALTER TABLE `ingreso` DISABLE KEYS */;
-INSERT INTO `ingreso` VALUES (9,'2019-06-15 00:00:00','2019-06-15 00:00:00',5,3,''),(10,'2019-05-13 00:00:00','2019-05-13 00:00:00',2,2,''),(11,'2019-07-13 00:00:00','2019-07-13 00:00:00',6,4,''),(12,'2019-09-15 00:00:00','2019-09-15 00:00:00',7,5,''),(13,'2019-10-20 00:00:00','2019-10-20 00:00:00',8,6,'');
+INSERT INTO `ingreso` VALUES (138,'16:37:45','2021-04-16','16:38:57','2021-04-16','salio',1234545667,34),(139,'16:39:20','2021-04-16',NULL,NULL,'ingreso',1234545667,34);
 /*!40000 ALTER TABLE `ingreso` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -84,16 +84,18 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `persona`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `persona` (
   `id_persona` int(11) NOT NULL AUTO_INCREMENT,
+  `tipo_documento` varchar(45) DEFAULT NULL,
   `identificacion` int(11) NOT NULL,
   `nombres` varchar(20) NOT NULL,
   `apellidos` varchar(20) NOT NULL,
   `telefono` varchar(20) NOT NULL,
   `Tipo_persona` varchar(30) NOT NULL,
-  PRIMARY KEY (`id_persona`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`id_persona`,`identificacion`),
+  KEY `identificacion` (`identificacion`)
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -102,7 +104,7 @@ CREATE TABLE `persona` (
 
 LOCK TABLES `persona` WRITE;
 /*!40000 ALTER TABLE `persona` DISABLE KEYS */;
-INSERT INTO `persona` VALUES (2,2147483647,'maria del rosario','gomez sanchez','3138146789',''),(5,1000185891,'carlos antonio','perez artunduaga','3158951232',''),(6,1077012855,'brayan mauricio','reyes poveda','3208316024','gestion administrativa'),(7,95216654,'santiago ','benavides sotelo','3124905998',''),(8,76566772,'clara elvira ','rojas caviedes','3114903221','');
+INSERT INTO `persona` VALUES (48,'Documento Extranjero',324324123,'nueva','persona','32134242143','Invitado'),(49,'Cedula Ciudadania',1234567890,'David','Ruiz','3212343463','Aprendiz'),(50,'Cedula Ciudadania',1234545667,'Juan','Perez','3213456784','Aprendiz');
 /*!40000 ALTER TABLE `persona` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -112,15 +114,16 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `usuarios`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `usuarios` (
   `id_usuario` int(11) NOT NULL AUTO_INCREMENT,
-  `Nombres` varchar(30) NOT NULL,
-  `Apellidos` varchar(45) NOT NULL,
-  `Nombre_Usuario` varchar(45) NOT NULL,
+  `identificacion` varchar(45) NOT NULL,
+  `nombres` varchar(30) NOT NULL,
+  `apellidos` varchar(45) NOT NULL,
+  `nombre_Usuario` varchar(45) NOT NULL,
   `password` varchar(45) NOT NULL,
   PRIMARY KEY (`id_usuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -129,12 +132,9 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
+INSERT INTO `usuarios` VALUES (9,'12345','admin','admin','123','123');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Dumping routines for database 'database_adsi'
---
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -145,4 +145,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-03-22 16:14:36
+-- Dump completed on 2021-04-16 16:59:26
